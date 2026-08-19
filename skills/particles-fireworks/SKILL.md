@@ -1,11 +1,11 @@
 ---
-name: threenix-fireworks
-description: Refactor an existing React Three Fiber WebGPU scene to use the Threenix Fireworks reference. Use when the user invokes $threenix-fireworks or asks to integrate the Threenix fireworks effect into an existing R3F WebGPU Canvas.
+name: particles-fireworks
+description: Implement a GPU compute fireworks component in an existing React Three Fiber WebGPU scene. Use when the user invokes $particles-fireworks or asks to add the Threenix fireworks effect to an existing R3F WebGPU Canvas.
 ---
 
 # Threenix Fireworks
 
-Refactor the user's existing scene; do not replace it with the Threenix demo.
+Implement the GPU compute fireworks component in the user's existing scene; do not replace it with the Threenix demo.
 
 ## Workflow
 
