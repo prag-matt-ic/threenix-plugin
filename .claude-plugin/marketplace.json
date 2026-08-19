@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "threenix",
-      "description": "Refactor WebGPU scenes with Threenix reference components.",
+      "description": "Three.js workflow skills and reference components.",
       "source": "./",
       "category": "development"
     }

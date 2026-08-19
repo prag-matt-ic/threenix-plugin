@@ -1,6 +1,6 @@
 {
   "name": "threenix",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Threenix references and skills for Three.js developers.",
   "author": {
     "name": "Threenix"
@@ -10,8 +10,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Threenix",
-    "shortDescription": "Refactor WebGPU scenes with Threenix references",
-    "longDescription": "Use Threenix workflow skills with reference components served from the developers app.",
+    "shortDescription": "Three.js workflows and reference components",
+    "longDescription": "Review Three.js code, optimize TSL shaders, simplify changes, and integrate reference components with Threenix skills.",
     "developerName": "Threenix",
     "category": "Developer Tools",
     "capabilities": ["Read"],
