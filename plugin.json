@@ -7,5 +7,17 @@
     "name": "Threenix"
   },
   "homepage": "https://developers.threenix.io",
-  "repository": "https://github.com/prag-matt-ic/threenix-plugin"
+  "repository": "https://github.com/prag-matt-ic/threenix-plugin",
+  "keywords": [
+    "three.js",
+    "react three fiber",
+    "r3f",
+    "webgpu",
+    "game development",
+    "3d development",
+    "creative coding",
+    "computer graphics",
+    "typescript",
+    "agent skills"
+  ]
 }
