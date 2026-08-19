@@ -35,3 +35,10 @@ Start a new session and invoke:
 ## MCP resources
 
 The public workflow Skills are bundled directly with the plugin. `$setup-canvas` includes a background-free WebGPU Canvas reference; the MCP server supplies the Fireworks reference.
+
+`$setup-canvas` requires React Three Fiber v10 alpha and Three.js:
+
+```bash
+npm install @react-three/fiber@alpha three
+npm install --save-dev @types/three
+```
