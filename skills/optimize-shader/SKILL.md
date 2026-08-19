@@ -83,3 +83,5 @@ For full TSL documentation refer to: https://github.com/mrdoob/three.js/wiki/Thr
 - Preserve semantic behavior; call out any intentional approximations.
 - Avoid raw GLSL strings or `onBeforeCompile`; keep logic in TSL nodes.
 - If a backend limitation applies (WebGL2 vs WebGPU), document it explicitly.
+
+<!-- TODO: add Particle buffer best practices here. -->
