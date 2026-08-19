@@ -5,5 +5,7 @@
   "description": "Threenix references and skills for Three.js developers.",
   "author": {
     "name": "Threenix"
-  }
+  },
+  "homepage": "https://developers.threenix.io",
+  "repository": "https://github.com/prag-matt-ic/threenix-plugin"
 }
