@@ -11,14 +11,12 @@
   "interface": {
     "displayName": "Threenix",
     "shortDescription": "Three.js workflows and reference components",
-    "longDescription": "Review Three.js code, optimize TSL shaders, simplify changes, and integrate reference components with Threenix skills.",
+    "longDescription": "Set up WebGPU canvases, review Three.js code, optimize TSL shaders, simplify changes, and integrate reference components with Threenix skills.",
     "developerName": "Threenix",
     "category": "Developer Tools",
     "capabilities": ["Read"],
     "websiteURL": "https://developers.threenix.io",
-    "defaultPrompt": [
-      "$threenix-fireworks Refactor my existing WebGPU R3F scene."
-    ]
+    "defaultPrompt": ["$threenix-fireworks Refactor my existing WebGPU R3F scene."]
   },
   "mcpServers": "./.mcp.json"
 }
