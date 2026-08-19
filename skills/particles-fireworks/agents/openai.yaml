@@ -2,3 +2,9 @@ interface:
   display_name: 'Threenix Fireworks'
   short_description: 'Add fireworks to an existing WebGPU R3F scene'
   default_prompt: '$particles-fireworks Add fireworks to my existing WebGPU R3F scene using the Threenix reference.'
+
+dependencies:
+  tools:
+    - type: 'mcp'
+      value: 'threenix'
+      description: 'Threenix developer resources'

@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Simplify Latest Commit'
+  short_description: 'Review the latest commit for safe simplifications'
+  default_prompt: '$simplify Review HEAD for duplication, unnecessary complexity, and verbose documentation.'

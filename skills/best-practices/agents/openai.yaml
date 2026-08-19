@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Three.js Best Practices'
+  short_description: 'Review Three.js and React Three Fiber code for performance'
+  default_prompt: '$best-practices Review this Three.js or React Three Fiber code and apply the relevant best practices.'

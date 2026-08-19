@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Clean Code Review'
+  short_description: 'Review and refactor code using the Clean Code checklist'
+  default_prompt: '$clean-code Review this code against the Clean Code checklist and make the smallest useful improvements.'
