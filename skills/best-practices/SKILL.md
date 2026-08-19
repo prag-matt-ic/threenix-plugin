@@ -17,9 +17,9 @@ Begin by identifying any violations of the checklist items. Then, refactor the c
 
 ---
 
-### Checklist
+## Checklist
 
-#### General Three.js & React Three Fiber Guidelines
+### General Three.js & React Three Fiber Guidelines
 
 - **Keep the camera in view**
   - Reduce the frustum size for production performance
