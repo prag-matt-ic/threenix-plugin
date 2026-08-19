@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "threenix",
+  "description": "Threenix skills and references for Three.js developers.",
+  "owner": {
+    "name": "Threenix",
+    "url": "https://developers.threenix.io"
+  },
+  "plugins": [
+    {
+      "name": "threenix",
+      "description": "Refactor WebGPU scenes with Threenix reference components.",
+      "source": "./",
+      "category": "development"
+    }
+  ]
+}

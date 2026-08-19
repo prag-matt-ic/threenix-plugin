@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "threenix": {
+      "headers": {
+        "X-Threenix-Token": "threenix"
+      },
+      "type": "streamable-http",
+      "url": "https://developers.threenix.io/mcp"
+    }
+  }
+}

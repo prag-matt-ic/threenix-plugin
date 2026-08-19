@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "threenix",
+  "displayName": "Threenix",
+  "version": "0.1.0",
+  "description": "Threenix references and skills for Three.js developers.",
+  "author": {
+    "name": "Threenix"
+  },
+  "homepage": "https://developers.threenix.io",
+  "repository": "https://github.com/prag-matt-ic/threenix-plugin"
+}

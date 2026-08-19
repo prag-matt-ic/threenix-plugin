@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "threenix": {
+      "type": "streamable-http",
+      "url": "https://developers.threenix.io/mcp",
+      "headers": {
+        "X-Threenix-Token": "threenix"
+      },
+      "http_headers": {
+        "X-Threenix-Token": "threenix"
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "threenix",
+  "version": "0.1.0",
+  "description": "Threenix references and skills for Three.js developers.",
+  "author": {
+    "name": "Threenix"
+  },
+  "homepage": "https://developers.threenix.io",
+  "repository": "https://github.com/prag-matt-ic/threenix-plugin",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Threenix",
+    "shortDescription": "Refactor WebGPU scenes with Threenix references",
+    "longDescription": "Use Threenix workflow skills with reference components served from the developers app.",
+    "developerName": "Threenix",
+    "category": "Developer Tools",
+    "capabilities": ["Read"],
+    "websiteURL": "https://developers.threenix.io",
+    "defaultPrompt": [
+      "$threenix-fireworks Refactor my existing WebGPU R3F scene."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}

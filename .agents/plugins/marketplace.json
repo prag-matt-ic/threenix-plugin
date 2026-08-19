@@ -1,0 +1,21 @@
+{
+  "name": "threenix",
+  "interface": {
+    "displayName": "Threenix"
+  },
+  "plugins": [
+    {
+      "name": "threenix",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/prag-matt-ic/threenix-plugin.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

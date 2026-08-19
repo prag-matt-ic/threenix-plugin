@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Threenix Fireworks'
+  short_description: 'Refactor an existing WebGPU R3F scene with Fireworks'
+  default_prompt: '$threenix-fireworks Refactor my existing WebGPU R3F scene using the Threenix reference.'
