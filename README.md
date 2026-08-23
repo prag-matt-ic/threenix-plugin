@@ -2,8 +2,10 @@
 
 Agent skill for building performant React Three Fiber v10+ WebGPU experiences.
 
-- prompts for reviewing and improving Three.js code
-- example components for a variety of components, from particles to animated text
+Threenix helps you (and your AI agent) build R3F/WebGPU apps using production-ready code and prompts.
+
+- prompts for reviewing and refactoring Three.js code for performance and best practices.
+- example components, including backgrounds, particles, animated text and postprocessing.
 
 ## ChatGPT / Codex
 
