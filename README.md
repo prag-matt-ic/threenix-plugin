@@ -1,8 +1,11 @@
-# Threenix
+# Threenix (Alpha)
 
-Three.js/WebGPU skills and reference components built with React Three Fiber v10.
+Agent skill for building performant React Three Fiber v10+ WebGPU experiences.
 
-## Codex
+- prompts for reviewing and improving Three.js code
+- example components for a variety of components, from particles to animated text
+
+## ChatGPT / Codex
 
 ```bash
 codex plugin marketplace add prag-matt-ic/threenix-plugin
@@ -16,6 +19,7 @@ Start a new task and invoke:
 - `$simplify` to review the latest commit for unnecessary complexity
 - `$setup-canvas` to create a WebGPU React Three Fiber canvas
 - `$threenix-fireworks` to integrate the Fireworks reference into an existing WebGPU project
+  w
 
 ## Claude Code
 
