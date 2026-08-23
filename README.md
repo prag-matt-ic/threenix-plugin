@@ -19,7 +19,6 @@ Start a new task and invoke:
 - `$simplify` to review the latest commit for unnecessary complexity
 - `$setup-canvas` to create a WebGPU React Three Fiber canvas
 - `$threenix-fireworks` to integrate the Fireworks reference into an existing WebGPU project
-  w
 
 ## Claude Code
 
