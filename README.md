@@ -14,13 +14,26 @@ codex plugin marketplace add prag-matt-ic/threenix-plugin
 codex plugin add threenix@threenix
 ```
 
-Start a new task and invoke:
+Start a new task. For focused reviews, `@`-mention the chosen files as context:
 
-- `$best-practices` to review and refactor Three.js or React Three Fiber code
-- `$optimize-shader` to optimize TSL shader code
-- `$simplify` to review the latest commit for unnecessary complexity
+- `$best-practices @Component.tsx` to review and refactor selected Three.js or React Three Fiber files
+- `$optimize-shader @Component.tsx` to optimize selected TSL shader files
+- `$simplify @file.ts` to focus the latest-commit review on selected files
+
+Other skills can be invoked directly:
+
 - `$setup-canvas` to create a WebGPU React Three Fiber canvas
 - `$threenix-fireworks` to integrate the Fireworks reference into an existing WebGPU project
+
+## Cursor
+
+Install the skills from `https://github.com/prag-matt-ic/threenix-plugin` using Cursor's [Skills guide](https://cursor.com/help/customization/skills), then invoke:
+
+- `/best-practices @Component.tsx`
+- `/optimize-shader @Component.tsx`
+- `/simplify @file.ts`
+- `/setup-canvas`
+- `/threenix-fireworks`
 
 ## Claude Code
 
