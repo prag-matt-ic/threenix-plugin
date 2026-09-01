@@ -1,0 +1,10 @@
+interface:
+  display_name: 'Add Mesh Surface Sampled Particles'
+  short_description: 'Add mesh-sampled particles to a WebGPU scene'
+  default_prompt: '$add-mesh-surface-sampled-particles Add the Phoenix particle silhouette to my existing React Three Fiber WebGPU scene.'
+
+dependencies:
+  tools:
+    - type: 'mcp'
+      value: 'threenix'
+      description: 'Threenix developer resources'

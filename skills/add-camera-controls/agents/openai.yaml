@@ -1,0 +1,10 @@
+interface:
+  display_name: 'Add Camera Controls'
+  short_description: 'Add cinematic camera controls to an R3F scene'
+  default_prompt: '$add-camera-controls Add cinematic camera controls to my existing React Three Fiber scene.'
+
+dependencies:
+  tools:
+    - type: 'mcp'
+      value: 'threenix'
+      description: 'Threenix developer resources'

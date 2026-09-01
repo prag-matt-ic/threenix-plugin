@@ -1,0 +1,10 @@
+interface:
+  display_name: 'Add Linked Particles'
+  short_description: 'Add linked particles to an existing WebGPU scene'
+  default_prompt: '$add-linked-particles Add GPU linked particles to my existing React Three Fiber WebGPU scene.'
+
+dependencies:
+  tools:
+    - type: 'mcp'
+      value: 'threenix'
+      description: 'Threenix developer resources'

@@ -1,0 +1,10 @@
+interface:
+  display_name: 'Add Fast Text'
+  short_description: 'Add fast WebGPU canvas text to an R3F scene'
+  default_prompt: '$add-fast-text Add fast canvas-backed text to my existing React Three Fiber WebGPU scene.'
+
+dependencies:
+  tools:
+    - type: 'mcp'
+      value: 'threenix'
+      description: 'Threenix developer resources'
