@@ -1,4 +1,4 @@
 interface:
   display_name: 'Add Scene Background'
   short_description: 'Add a TSL background to an existing WebGPU R3F canvas'
-  default_prompt: '$background-node Add a custom TSL scene background to my existing WebGPU React Three Fiber canvas.'
+  default_prompt: '$add-background-node Add a custom TSL scene background to my existing WebGPU React Three Fiber canvas.'

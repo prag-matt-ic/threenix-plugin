@@ -1,6 +1,6 @@
 ---
-name: particles-fireworks
-description: Implement a GPU compute fireworks component in an existing React Three Fiber WebGPU scene. Use when the user invokes $particles-fireworks or asks to add the Threenix fireworks effect to an existing R3F WebGPU Canvas.
+name: add-fireworks
+description: Implement a GPU compute fireworks component in an existing React Three Fiber WebGPU scene. Use when the user invokes $add-fireworks or asks to add the Threenix fireworks effect to an existing R3F WebGPU Canvas.
 ---
 
 # Threenix Fireworks

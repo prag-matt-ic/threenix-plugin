@@ -42,12 +42,12 @@ Catch performance problems, remove unnecessary complexity, and make Three.js, R3
 | [`optimize-tsl`](skills/optimize-tsl/SKILL.md)     | Optimize TSL node graphs without changing their visible output.        | `$optimize-tsl @Shader.ts`       | `/threenix:optimize-tsl @Shader.ts`       | `/optimize-tsl @Shader.ts`       |
 | [`simplify`](skills/simplify/SKILL.md)             | Review the latest commit for duplication and unnecessary complexity.   | `$simplify @file.ts`             | `/threenix:simplify @file.ts`             | `/simplify @file.ts`             |
 
-### Build Components
+### Add Components
 
 Ship WebGPU features faster by adding proven scene foundations and effects to an existing project.
 
-| Name                                                         | Description                                                     | ChatGPT / Codex        | Claude Code                     | Cursor                 |
-| ------------------------------------------------------------ | --------------------------------------------------------------- | ---------------------- | ------------------------------- | ---------------------- |
-| [`background-node`](skills/background-node/SKILL.md)         | Add a custom TSL background to an existing WebGPU R3F canvas.   | `$background-node`     | `/threenix:background-node`     | `/background-node`     |
-| [`particles-fireworks`](skills/particles-fireworks/SKILL.md) | Add GPU compute fireworks to an existing WebGPU R3F scene.      | `$particles-fireworks` | `/threenix:particles-fireworks` | `/particles-fireworks` |
-| [`setup-canvas`](skills/setup-canvas/SKILL.md)               | Create a WebGPU R3F canvas from the bundled Threenix reference. | `$setup-canvas`        | `/threenix:setup-canvas`        | `/setup-canvas`        |
+| Name                                                             | Description                                                     | ChatGPT / Codex          | Claude Code                       | Cursor                   |
+| ---------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------ | --------------------------------- | ------------------------ |
+| [`add-background-node`](skills/add-background-node/SKILL.md)     | Add a custom TSL background to an existing WebGPU R3F canvas.   | `$add-background-node`   | `/threenix:add-background-node`   | `/add-background-node`   |
+| [`add-fireworks`](skills/add-fireworks/SKILL.md)                 | Add GPU compute fireworks to an existing WebGPU R3F scene.      | `$add-fireworks`         | `/threenix:add-fireworks`         | `/add-fireworks`         |
+| [`add-webgpu-canvas`](skills/add-webgpu-canvas/SKILL.md)         | Create a WebGPU R3F canvas from the bundled Threenix reference. | `$add-webgpu-canvas`     | `/threenix:add-webgpu-canvas`     | `/add-webgpu-canvas`     |

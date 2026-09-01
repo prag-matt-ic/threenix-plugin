@@ -1,6 +1,6 @@
 ---
-name: background-node
-description: Add a custom TSL scene background to an existing React Three Fiber WebGPU Canvas. Use when the user invokes $background-node or asks for a custom background node in a WebGPU R3F scene.
+name: add-background-node
+description: Add a custom TSL scene background to an existing React Three Fiber WebGPU Canvas. Use when the user invokes $add-background-node or asks for a custom background node in a WebGPU R3F scene.
 ---
 
 # Threenix Background Node

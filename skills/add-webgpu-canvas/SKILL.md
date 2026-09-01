@@ -1,9 +1,9 @@
 ---
-name: setup-canvas
-description: Create a React Three Fiber WebGPU canvas from the bundled Threenix reference. Use when the user invokes $setup-canvas or asks to create or set up a WebGPU Canvas.
+name: add-webgpu-canvas
+description: Create a React Three Fiber WebGPU canvas from the bundled Threenix reference. Use when the user invokes $add-webgpu-canvas or asks to create or set up a WebGPU Canvas.
 ---
 
-# Threenix Setup Canvas
+# Threenix WebGPU Canvas
 
 Create a WebGPU React Three Fiber canvas from `assets/WebGPUCanvas.tsx` in this Skill.
 

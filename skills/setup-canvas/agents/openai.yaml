@@ -1,4 +1,0 @@
-interface:
-  display_name: 'Setup WebGPU Canvas'
-  short_description: 'Create a WebGPU R3F canvas from the Threenix reference'
-  default_prompt: '$setup-canvas Create a WebGPU React Three Fiber canvas for this scene.'
