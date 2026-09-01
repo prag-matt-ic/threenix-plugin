@@ -1,6 +1,6 @@
 ---
-name: optimize-shader
-description: Review and refactor TSL shader node graphs for performance, clarity, and portability. Use when the user invokes $optimize-shader or asks to optimize Three.js Shading Language (TSL) code.
+name: optimize-tsl
+description: Review and refactor TSL shader node graphs for performance, clarity, and portability. Use when the user invokes $optimize-tsl or asks to optimize Three.js Shading Language (TSL) code.
 ---
 
 # Review and refactor TSL node graphs for performance, clarity, and portability

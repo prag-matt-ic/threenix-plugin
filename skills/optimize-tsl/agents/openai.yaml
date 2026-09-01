@@ -1,4 +1,4 @@
 interface:
   display_name: 'Optimize TSL Shader'
   short_description: 'Optimize TSL shader node graphs for performance and clarity'
-  default_prompt: '$optimize-shader Review and optimize this TSL shader node graph without changing its visible output.'
+  default_prompt: '$optimize-tsl Review and optimize this TSL shader node graph without changing its visible output.'
