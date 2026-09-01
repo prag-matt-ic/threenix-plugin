@@ -7,6 +7,14 @@ description: Use the following Clean Code Checklist to review and refactor the c
 
 Begin first by identifying any violations of the checklist items. Then, refactor the code to address these issues.
 
+---
+
+### Full Documentation
+
+- [Clean Code TypeScript](https://github.com/labs42io/clean-code-typescript)
+
+---
+
 ## Checklist
 
 - [ ] Use meaningful names – variable and function names should clearly communicate what the code does. Avoid abbreviations or cryptic identifiers; clear naming makes the code self‑documenting. Boolean variables should be named to imply true/false (e.g. isVisible, hasItems). Don't add unecessary prefixes or suffixes - e.g do not add 'Ref' to a useRef variable.
