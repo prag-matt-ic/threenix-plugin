@@ -1,6 +1,10 @@
-# Threenix (Alpha)
+![Threenix hero](assets/hero.jpg)
 
-Agent skill for building performant React Three Fiber v10+ WebGPU experiences.
+# Skills for Advanced React Three Fiber + WebGPU Developers
+
+[![skills.sh](https://skills.sh/b/prag-matt-ic/threenix-plugin)](https://skills.sh/prag-matt-ic/threenix-plugin)
+
+Threenix (Alpha): AI skills for building performant React Three Fiber v10 WebGPU experiences.
 
 Threenix helps you (and your AI agent) build R3F/WebGPU apps using production-ready code and prompts.
 
@@ -8,6 +12,14 @@ Threenix helps you (and your AI agent) build R3F/WebGPU apps using production-re
 - example components, including backgrounds, particles, animated text and postprocessing.
 
 ## Installation
+
+### Skills CLI
+
+Run this from your project directory to install Threenix skills:
+
+```bash
+npx skills add prag-matt-ic/threenix-plugin
+```
 
 ### ChatGPT / Codex
 
