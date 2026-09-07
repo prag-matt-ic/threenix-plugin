@@ -1,19 +1,18 @@
-![Threenix hero](assets/hero.jpg)
+[![Threenix hero](assets/hero.jpg)](https://threenix.io)
+
+[Explore the demo](https://threenix.io)
 
 # Skills for Advanced React Three Fiber + WebGPU Developers
 
 [![skills.sh](https://skills.sh/b/prag-matt-ic/threenix-plugin)](https://skills.sh/prag-matt-ic/threenix-plugin)
 
-Threenix (Alpha): AI skills for building performant React Three Fiber v10 WebGPU experiences.
+Build WebGPU scenes and improve existing Three.js code with focused AI skills from Threenix, a Three.js development studio. Includes R3F v10 scene components, GPU particle effects, and reviews for performance and TSL shaders.
 
-Threenix helps you (and your AI agent) build R3F/WebGPU apps using production-ready code and prompts.
-
-- prompts for reviewing and refactoring Three.js code for performance and best practices.
-- example components, including backgrounds, particles, animated text and postprocessing.
+_Currently in Alpha._
 
 ## Why Threenix
 
-React Three Fiber v10 and Three.js Shading Language (TSL) are still evolving. Reliable patterns can be hard to find online, and performance best practices are easy to miss. These skills were developed alongside real 3D projects, turning practical experience into reusable components and focused guidance for you and your AI agent.
+React Three Fiber v10 and Three.js Shading Language (TSL) are still evolving. Reliable patterns can be hard to find online, and performance best practices are easy to miss. These skills were developed alongside real 3D projects where they have proven measurable impact.
 
 ## Installation
 
@@ -25,49 +24,61 @@ Run this from your project directory to install Threenix skills:
 npx skills add prag-matt-ic/threenix-plugin
 ```
 
-### ChatGPT / Codex
+Follow the prompts to choose your skills and agents. For Cursor-specific guidance, see Cursor's [Skills guide](https://cursor.com/help/customization/skills).
+
+<details>
+<summary><strong>ChatGPT / Codex</strong></summary>
 
 ```bash
 codex plugin marketplace add prag-matt-ic/threenix-plugin
 codex plugin add threenix@threenix
 ```
 
-### Cursor
+</details>
 
-Install the skills from `https://github.com/prag-matt-ic/threenix-plugin` using Cursor's [Skills guide](https://cursor.com/help/customization/skills).
-
-### Claude Code
+<details>
+<summary><strong>Claude Code</strong></summary>
 
 ```bash
 claude plugin marketplace add prag-matt-ic/threenix-plugin
 claude plugin install threenix@threenix
 ```
 
+</details>
+
+## Start here
+
+- **Review an existing scene:** [`best-practices`](skills/best-practices/SKILL.md)
+- **Start a WebGPU scene:** [`add-webgpu-canvas`](skills/add-webgpu-canvas/SKILL.md)
+- **Add a visual effect:** [`add-fireworks`](skills/add-fireworks/SKILL.md)
+
 ## Skills
 
 Start a new task or session after installing. For focused reviews, `@`-mention the chosen files as context.
+
+Invoke a skill by name: `$best-practices` in Codex, `/best-practices` in Cursor or Claude Code when installed through the Skills CLI, or `/threenix:best-practices` with the Claude Code plugin.
 
 ### Review / Refactor
 
 Catch performance problems, remove unnecessary complexity, and make Three.js, R3F, and TSL code easier to maintain.
 
-| Name                                               | Description                                                            | ChatGPT / Codex                  | Claude Code                               | Cursor                           |
-| -------------------------------------------------- | ---------------------------------------------------------------------- | -------------------------------- | ----------------------------------------- | -------------------------------- |
-| [`best-practices`](skills/best-practices/SKILL.md) | Review and refactor Three.js and R3F code for performance and clarity. | `$best-practices @Component.tsx` | `/threenix:best-practices @Component.tsx` | `/best-practices @Component.tsx` |
-| [`clean-code`](skills/clean-code/SKILL.md)         | Review and refactor code with the Threenix Clean Code checklist.       | `$clean-code @Component.tsx`     | `/threenix:clean-code @Component.tsx`     | `/clean-code @Component.tsx`     |
-| [`optimize-tsl`](skills/optimize-tsl/SKILL.md)     | Optimize TSL node graphs without changing their visible output.        | `$optimize-tsl @Shader.ts`       | `/threenix:optimize-tsl @Shader.ts`       | `/optimize-tsl @Shader.ts`       |
-| [`simplify`](skills/simplify/SKILL.md)             | Review the latest commit for duplication and unnecessary complexity.   | `$simplify @file.ts`             | `/threenix:simplify @file.ts`             | `/simplify @file.ts`             |
+| Skill                                              | What it does                                                                          |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [`best-practices`](skills/best-practices/SKILL.md) | Review and refactor Three.js and R3F code for performance and clarity.                |
+| [`clean-code`](skills/clean-code/SKILL.md)         | Review and refactor Typescript code against a Clean Code checklist.                   |
+| [`optimize-tsl`](skills/optimize-tsl/SKILL.md)     | Optimize Three.js Shading Language (TSL) nodes without changing their visible output. |
+| [`simplify`](skills/simplify/SKILL.md)             | Review the latest commit for duplication and unnecessary complexity.                  |
 
 ### Add Components
 
 Ship WebGPU features faster by adding proven scene foundations and effects to an existing project.
 
-| Name                                                                                       | Description                                                       | ChatGPT / Codex                       | Claude Code                                    | Cursor                                |
-| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- | ------------------------------------- | ---------------------------------------------- | ------------------------------------- |
-| [`add-background-node`](skills/add-background-node/SKILL.md)                               | Add a custom TSL background to an existing WebGPU R3F canvas.     | `$add-background-node`                | `/threenix:add-background-node`                | `/add-background-node`                |
-| [`add-camera-controls`](skills/add-camera-controls/SKILL.md)                               | Add cinematic camera controls to an existing R3F scene.           | `$add-camera-controls`                | `/threenix:add-camera-controls`                | `/add-camera-controls`                |
-| [`add-fast-text`](skills/add-fast-text/SKILL.md)                                           | Add fast canvas-backed text to an existing WebGPU R3F scene.      | `$add-fast-text`                      | `/threenix:add-fast-text`                      | `/add-fast-text`                      |
-| [`add-fireworks`](skills/add-fireworks/SKILL.md)                                           | Add GPU compute fireworks to an existing WebGPU R3F scene.        | `$add-fireworks`                      | `/threenix:add-fireworks`                      | `/add-fireworks`                      |
-| [`add-linked-particles`](skills/add-linked-particles/SKILL.md)                             | Add GPU proximity-linked particles to an existing WebGPU scene.   | `$add-linked-particles`               | `/threenix:add-linked-particles`               | `/add-linked-particles`               |
-| [`add-mesh-surface-sampled-particles`](skills/add-mesh-surface-sampled-particles/SKILL.md) | Add a mesh-sampled Phoenix particle silhouette to a WebGPU scene. | `$add-mesh-surface-sampled-particles` | `/threenix:add-mesh-surface-sampled-particles` | `/add-mesh-surface-sampled-particles` |
-| [`add-webgpu-canvas`](skills/add-webgpu-canvas/SKILL.md)                                   | Create a WebGPU R3F canvas from the bundled Threenix reference.   | `$add-webgpu-canvas`                  | `/threenix:add-webgpu-canvas`                  | `/add-webgpu-canvas`                  |
+| Skill                                                                                      | What it does                                                      |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| [`add-background-node`](skills/add-background-node/SKILL.md)                               | Add a custom TSL background to an existing WebGPU R3F canvas.     |
+| [`add-camera-controls`](skills/add-camera-controls/SKILL.md)                               | Add cinematic camera controls to an existing R3F scene.           |
+| [`add-fast-text`](skills/add-fast-text/SKILL.md)                                           | Add fast canvas-backed text to an existing WebGPU R3F scene.      |
+| [`add-fireworks`](skills/add-fireworks/SKILL.md)                                           | Add GPU compute fireworks to an existing WebGPU R3F scene.        |
+| [`add-linked-particles`](skills/add-linked-particles/SKILL.md)                             | Add GPU proximity-linked particles to an existing WebGPU scene.   |
+| [`add-mesh-surface-sampled-particles`](skills/add-mesh-surface-sampled-particles/SKILL.md) | Add a mesh-sampled Phoenix particle silhouette to a WebGPU scene. |
+| [`add-webgpu-canvas`](skills/add-webgpu-canvas/SKILL.md)                                   | Create a WebGPU R3F canvas from the bundled Threenix reference.   |
