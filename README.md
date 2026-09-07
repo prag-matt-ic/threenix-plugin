@@ -11,6 +11,10 @@ Threenix helps you (and your AI agent) build R3F/WebGPU apps using production-re
 - prompts for reviewing and refactoring Three.js code for performance and best practices.
 - example components, including backgrounds, particles, animated text and postprocessing.
 
+## Why Threenix
+
+React Three Fiber v10 and Three.js Shading Language (TSL) are still evolving. Reliable patterns can be hard to find online, and performance best practices are easy to miss. These skills were developed alongside real 3D projects, turning practical experience into reusable components and focused guidance for you and your AI agent.
+
 ## Installation
 
 ### Skills CLI
