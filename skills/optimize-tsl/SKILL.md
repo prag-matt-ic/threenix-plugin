@@ -25,10 +25,11 @@ For full TSL documentation refer to: https://github.com/mrdoob/three.js/wiki/Thr
 
 ## Procedure (follow in order)
 
-1. **Determine bottleneck + stage mapping**
-   - State whether the pass is vertex-bound, fragment-bound, or bandwidth-bound and why.
+1. **Establish evidence + stage mapping**
+   - State the suspected bottleneck and the evidence for it. Treat vertex/fragment/bandwidth limits as hypotheses until profiling supports them; pass timing alone does not identify the limiting stage.
    - Map the heavy work to stage: `material.positionNode`/`geometryNode` is vertex-stage, `material.colorNode`/`fragmentNode`/postprocessing is fragment-stage.
    - Note any `vertexStage()` / `varying()` usage and whether it matches the actual consumption site.
+   - When benchmarking is requested or a suitable local fixture is available, follow [BENCHMARK.md](BENCHMARK.md): import the actual target graph into a deterministic render/compute fixture, declare shader source dependencies, and capture the baseline **before editing**. Take an unchanged repeat to establish noise. If a faithful fixture cannot run locally, state the limitation and keep performance estimates unmeasured.
 
 2. **Static audit (find issues)**
    - Unused or redundant nodes, uniforms, varyings, or cached vars (`toVar`).
@@ -56,13 +57,14 @@ For full TSL documentation refer to: https://github.com/mrdoob/three.js/wiki/Thr
    - **Keep interfaces lean:** only emit nodes/varyings that are actually consumed; preserve slot semantics.
 
 5. **Output (deliverables)**
+   - **Measured comparison, when captured:** run the same fixture/settings after edits with `--baseline` pointing to the saved `result.json`. Inspect output differences and repeat A/B runs before claiming a win. Report GPU pass timing separately from stage hypotheses and application FPS; include artifact paths and any inconclusive result. See [benchmark interpretation](BENCHMARK.md#reading-results).
    - **Findings table**
      | Issue | Location | Severity | Fix summary |
      | ----- | -------- | -------- | ----------- |
    - **Refactor plan** (bulleted, 5-10 lines).
    - **Refactored code**: updated **TSL TypeScript** node code.
    - **Change diff**: minimal unified diff or `changes` tool entries.
-   - **Impact estimate**: which stage got cheaper and why (e.g., removed N trig ops per fragment).
+   - **Impact estimate**: which stage should get cheaper and why (e.g., removed N trig ops per fragment), clearly distinguished from measured results and compiler-dependent assumptions.
    - **TODOs**: further safe optimizations or optional quality dials.
 
 ## Checks (single consolidated checklist)

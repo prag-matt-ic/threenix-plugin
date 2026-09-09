@@ -69,6 +69,8 @@ Catch performance problems, remove unnecessary complexity, and make Three.js, R3
 | [`optimize-tsl`](skills/optimize-tsl/SKILL.md)     | Optimize Three.js Shading Language (TSL) nodes without changing their visible output. |
 | [`simplify`](skills/simplify/SKILL.md)             | Review the latest commit for duplication and unnecessary complexity.                  |
 
+For local before/after GPU measurements with `optimize-tsl`, see the [Node TSL benchmark guide](skills/optimize-tsl/BENCHMARK.md).
+
 ### Add Components
 
 Ship WebGPU features faster by adding proven scene foundations and effects to an existing project.
