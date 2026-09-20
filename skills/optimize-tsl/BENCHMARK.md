@@ -33,9 +33,11 @@ npm run bench:tsl -- scripts/benchmarks/tsl-compute.mjs --variant after --out .b
 
 This is a harness example, not a promised optimization: a compiler may already remove the extra work, and floating-point results can differ.
 
-The [landing component suite](../../../scripts/benchmarks/README.md) exercises the actual `InvertedMeteorFalls`, `SunFragments`, `Terrain`, and `Fireflies` components through a local R3F mount, plus the exported production background node factory. Its Node preload supplies the landing app's aliases, Next asset imports, JSX runtime, and empty local storage. Image fixtures decode the actual local assets into GPU textures with their dimensions and sampling settings preserved. These are explicit adapters for those components, not an arbitrary component extractor.
+The [landing component suite](../../../scripts/benchmarks/README.md) exercises the actual `InvertedMeteorFalls`, `SunFragments`, `Terrain`, `Fireflies`, and `crescentMaterial` graphs through a local R3F mount, plus the exported production background node factory. Its Node preload supplies the landing app's aliases, Next asset imports, JSX runtime, and empty local storage. Image fixtures decode the actual local assets into GPU textures with their dimensions and sampling settings preserved. These are explicit adapters for those components, not an arbitrary component extractor.
 
-The meteor and firefly compute fixtures inspect private Three r184 `NodeManager` bindings to identify their production storage buffers. That version-specific inspection belongs to the local fixtures; the generic runner only consumes the returned compute nodes and output attributes. Recheck those adapters before changing Three versions.
+The meteor and firefly compute fixtures inspect private Three `NodeManager` bindings to identify their production storage buffers. That version-specific inspection belongs to the local fixtures; the generic runner only consumes the returned compute nodes and output attributes. Recheck those adapters before changing Three versions.
+
+Those private bindings are the only revision-sensitive part: `scripts/benchmarks/landing-crescent-blade.mjs` reads no internals and ran unmodified against `three@0.185.0`, which is what this monorepo installs. The landing fixtures' own `assert.equal(THREE.REVISION, '184')` guards are what pin the compute cases; treat a Three upgrade as a fixture migration, not a runner change.
 
 ## Running from an installed plugin
 
@@ -75,7 +77,7 @@ The runner freezes built-in TSL `time`, `deltaTime`, and `frameId` at zero. Supp
 
 Each sample submits one `renderer.render()` or `renderer.compute()` call and resolves its GPU timestamps. Render compilation and warmup precede sampling; `prepare` and output readback happen outside it. The reported milliseconds measure the GPU pass workload, including rasterization, memory traffic, blending and other relevant GPU work. They exclude fixture resets and do not isolate vertex time from fragment time or measure React/CPU overhead, shader compilation latency, or application FPS.
 
-Three r184 resolves the last frame's accumulated pass duration, so this runner resolves every sample separately. See the [r184 timestamp implementation](https://github.com/mrdoob/three.js/blob/r184/src/renderers/webgpu/utils/WebGPUTimestampQueryPool.js) and [renderer implementation](https://github.com/mrdoob/three.js/blob/r184/src/renderers/common/Renderer.js).
+Three resolves the last frame's accumulated pass duration, so this runner resolves every sample separately. See the [r184 timestamp implementation](https://github.com/mrdoob/three.js/blob/r184/src/renderers/webgpu/utils/WebGPUTimestampQueryPool.js) and [renderer implementation](https://github.com/mrdoob/three.js/blob/r184/src/renderers/common/Renderer.js); `resolveTimestampsAsync` and the backend query pool still work this way in `three@0.185.0`.
 
 Captured `shader-*.wgsl` files are the modules submitted to the device, including any support shaders. WGSL alone is not a replayable component: geometry, bind groups, buffers, textures, pipeline flags and render targets determine execution. The fixture recreates that resource context; exported source is an inspection artifact, not a machine-instruction count or a standalone benchmark input.
 
