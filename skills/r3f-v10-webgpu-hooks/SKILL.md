@@ -27,13 +27,13 @@ Keep CPU layouts, scratch vectors, matrices, and static source arrays in ordinar
 
 ## Uniforms and node composition
 
-Update hook-returned uniforms through `.value`; mutate vector/color values with `.set()` or `.copy()` when appropriate. Use effects for prop changes and `useFrame` for animation. Avoid React state per frame and refs that retain an obsolete uniform after a rebuild.
+Name uniforms with the `uName` convention, such as `uAmount` or `uTime`. Update hook-returned uniforms through `.value`; mutate vector/color values with `.set()` or `.copy()` when appropriate. Use effects for prop changes and `useFrame` for animation. Avoid React state per frame and refs that retain an obsolete uniform after a rebuild.
 
 For repeated instances, use a stable unique scope. When deriving one from `useId()`, prefix a letter and strip non-alphanumeric characters: `const scope = 'effect' + useId().replace(/[^a-zA-Z0-9]/g, '')`. Avoid generated WGSL names containing `__` or beginning with a digit.
 
 Creator callbacks receive `CreatorState`. Its `uniforms`, `nodes`, `buffers`, and `gpuStorage` are scoped wrappers: `uniforms.uTime` reads a root entry and `uniforms.scope('effect').uAmount` reads a scoped entry. `textures` is a Map of plain textures, so read with `textures.get(key)` and wrap with TSL `texture(...)` when sampling.
 
-Mount `Parent` beneath the Canvas. It creates and updates `amount` in the `scene` scope; `Child` reads that same uniform inside `useLocalNodes`, without passing it through props. This example assumes one parent; repeated independent parents need unique scopes.
+Mount `Parent` beneath the Canvas. It creates and updates `uAmount` in the `scene` scope; `Child` reads that same uniform inside `useLocalNodes`, without passing it through props. This example assumes one parent; repeated independent parents need unique scopes.
 
 ```tsx
 'use client'
@@ -43,13 +43,13 @@ import type { FC } from 'react'
 import { normalLocal, positionLocal } from 'three/tsl'
 import type { UniformNode } from 'three/webgpu'
 
-type Uniforms = { amount: UniformNode<'float', number> }
+type Uniforms = { uAmount: UniformNode<'float', number> }
 
 const Parent: FC = () => {
-  const { amount } = useUniforms({ amount: 0 }, 'scene')
+  const { uAmount } = useUniforms({ uAmount: 0 }, 'scene')
 
   useFrame(({ elapsed }) => {
-    amount.value = Math.sin(elapsed) * 0.1
+    uAmount.value = Math.sin(elapsed) * 0.1
   })
 
   return <Child />
@@ -57,8 +57,8 @@ const Parent: FC = () => {
 
 const Child: FC = () => {
   const { positionNode } = useLocalNodes(({ uniforms }) => {
-    const { amount } = uniforms.scope<Uniforms>('scene')
-    return { positionNode: positionLocal.add(normalLocal.mul(amount)) }
+    const { uAmount } = uniforms.scope<Uniforms>('scene')
+    return { positionNode: positionLocal.add(normalLocal.mul(uAmount)) }
   })
 
   return (
