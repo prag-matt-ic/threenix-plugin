@@ -142,6 +142,6 @@ The installed skill does not include the Threenix monorepo or component sources.
 | `{ "slug": "linked-particles" }` | Position/life packing; opportunities to combine velocity and seed after auditing all readers/writers. Include link-output storage in binding counts and review neighbor reads during position writes for races. |
 | `{ "slug": "mesh-surface-sampled-particles" }` | Separate initial and mutable positions preserve the rest shape; do not remove the immutable buffer merely to reduce the buffer count. |
 
-Treat returned sources as authoritative: inspect their current layout rather than assuming these patterns are unchanged or fully optimized. If the tool or authentication is unavailable, report that the reference could not be retrieved; do not reconstruct it from local or bundled sources. The self-contained guidance above can still be applied to the user's supplied code.
+Treat returned sources as authoritative: inspect their current layout rather than assuming these patterns are unchanged or fully optimized. If the tool or server is unavailable, report that the reference could not be retrieved; do not reconstruct it from local or bundled sources. The self-contained guidance above can still be applied to the user's supplied code.
 
 For buffer refactors, verify initialization, respawn/reset, count changes, lane preservation, binding validation, and visual parity. Measure performance with the same fixture before claiming a speedup.
