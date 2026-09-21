@@ -8,49 +8,54 @@ Keywords: TSL, WGSL, WebGPU, GPU timestamps, Node, benchmark, shader optimizatio
 
 The [Node runner](scripts/benchmark.mjs) uses the project's Three.js and native Dawn WebGPU to run an isolated render or compute fixture on the GPU. It records hardware timestamp samples, generated WGSL, source snapshots, and output bytes. This is a local prototype; automatic component extraction and plugin lifecycle hooks are not implemented.
 
-## Quickstart in this repository
+## Quickstart from an installed skill
 
-After installing the root dependencies, run from the monorepo root:
-
-```sh
-npm run bench:tsl -- scripts/benchmarks/tsl-palette.mjs --out .benchmarks/palette-before
-```
-
-The palette fixture imports the production `getStepColourFromPalette` graph from `@repo/ui/tslColours`. After that command finishes, edit the target source and compare using the same fixture and settings:
-
-```sh
-npm run bench:tsl -- scripts/benchmarks/tsl-palette.mjs --out .benchmarks/palette-after --baseline .benchmarks/palette-before/result.json
-```
-
-Each output directory must be new. Keep the baseline directory intact. Before making edits, run an unchanged second capture against the baseline to see the local timing noise.
-
-The synthetic compute fixture demonstrates `length(p)^2` versus `dot(p, p)` with the same inputs:
-
-```sh
-npm run bench:tsl -- scripts/benchmarks/tsl-compute.mjs --variant before --out .benchmarks/compute-before
-npm run bench:tsl -- scripts/benchmarks/tsl-compute.mjs --variant after --out .benchmarks/compute-after --baseline .benchmarks/compute-before/result.json
-```
-
-This is a harness example, not a promised optimization: a compiler may already remove the extra work, and floating-point results can differ.
-
-The [landing component suite](../../../scripts/benchmarks/README.md) exercises the actual `InvertedMeteorFalls`, `SunFragments`, `Terrain`, `Fireflies`, and `crescentMaterial` graphs through a local R3F mount, plus the exported production background node factory. Its Node preload supplies the landing app's aliases, Next asset imports, JSX runtime, and empty local storage. Image fixtures decode the actual local assets into GPU textures with their dimensions and sampling settings preserved. These are explicit adapters for those components, not an arbitrary component extractor.
-
-The meteor and firefly compute fixtures inspect private Three `NodeManager` bindings to identify their production storage buffers. That version-specific inspection belongs to the local fixtures; the generic runner only consumes the returned compute nodes and output attributes. Recheck those adapters before changing Three versions.
-
-Those private bindings are the only revision-sensitive part: `scripts/benchmarks/landing-crescent-blade.mjs` reads no internals and ran unmodified against `three@0.185.0`, which is what this monorepo installs. The landing fixtures' own `assert.equal(THREE.REVISION, '184')` guards are what pin the compute cases; treat a Three upgrade as a fixture migration, not a runner change.
-
-## Running from an installed plugin
-
-Run in the target project's directory. The runner resolves `webgpu` and `three` from that directory, even when the script lives in a plugin cache. The prototype uses `webgpu@0.6.0` and was developed against `three@0.184.0`; retain the project's Three version for its own graph and verify compatibility before comparing results.
+Run in the target project's directory. The runner resolves `webgpu` and `three` from that directory, even when the script lives in a plugin cache. It uses `webgpu@0.6.0` and was developed against Three r184/r185; retain the project's Three version and verify compatibility before comparing results.
 
 For a project that already installs Three:
 
 ```sh
 npm install --save-dev webgpu@0.6.0 tsx
-node --import tsx /path/to/threenix/skills/optimize-tsl/scripts/benchmark.mjs ./benchmarks/target.mjs --out .benchmarks/before
 ```
 
-Omit `--import tsx` when the fixture and all its imports are plain JavaScript. TypeScript/TSX imports need a loader; app-specific aliases and browser asset imports still need to resolve in Node.
+Create `benchmarks/target.mjs` in that project. This standalone synthetic fixture verifies the harness without requiring Threenix component source or assets:
+
+```js
+export default function createFixture({ THREE, tsl }) {
+  const { Fn, instanceIndex, storage } = tsl
+  const count = 65536
+  const output = new THREE.StorageBufferAttribute(count, 1)
+  const buffer = storage(output, 'float', count)
+  const compute = Fn(() => {
+    buffer.element(instanceIndex).assign(instanceIndex.toFloat().mul(0.5))
+  })().compute(count)
+
+  return {
+    name: 'scaled-index',
+    workload: { count, scale: 0.5 },
+    compute,
+    output,
+    dispose: () => compute.dispose(),
+  }
+}
+```
+
+Replace `/path/to/threenix` with the installed plugin or skills root containing `skills/optimize-tsl` (or use the actual `optimize-tsl/scripts/benchmark.mjs` path for a standalone skill installation):
+
+```sh
+node /path/to/threenix/skills/optimize-tsl/scripts/benchmark.mjs ./benchmarks/target.mjs --out .benchmarks/before
+node /path/to/threenix/skills/optimize-tsl/scripts/benchmark.mjs ./benchmarks/target.mjs --out .benchmarks/repeat --baseline .benchmarks/before/result.json
+```
+
+Each output directory must be new. The unchanged repeat establishes local timing noise. For an actual optimization, replace the synthetic fixture with one importing the target graph, capture a new baseline **before editing** in `.benchmarks/target-before`, then run the edited graph with `--out .benchmarks/target-after --baseline .benchmarks/target-before/result.json`. Keep the baseline directory intact. The synthetic example measures only its own workload, not the performance of a component.
+
+For TypeScript/TSX fixtures, add `--import tsx` after `node`. App-specific aliases and browser asset imports must also resolve in Node.
+
+## Threenix component references
+
+Installed skills do not include the Threenix monorepo, its benchmark fixtures, or package assets. Retrieve component references exclusively through `get_component_reference` on the `threenix` MCP server, using the [particle reference slugs](SKILL.md#retrieve-particle-references-through-mcp). Preserve returned `files[]` paths and decode each file according to its `encoding`; source is UTF-8 and binary assets are base64. Do not import private package paths, fetch assets through alternate routes, or reconstruct unavailable references. If MCP access fails, report the limitation and continue only with the user's available code or the synthetic harness example.
+
+Build a fixture adapter around the retrieved production graph when it can run faithfully in Node. The MCP response does not provide monorepo benchmark scripts, demos, or a ready-made fixture. Browser-dependent components may require a browser benchmark instead.
 
 Defaults are `--width 1024 --height 1024 --warmup 30 --samples 100 --variant default`. The hardware backend defaults to Metal on macOS, D3D12 on Windows, and Vulkan on Linux; `--backend metal|d3d12|vulkan` overrides it. A hardware adapter with `timestamp-query` is required. Unsupported hardware, invalid timestamps, and GPU validation errors fail the run; there is no CPU timing fallback.
 
@@ -69,7 +74,7 @@ Export a function, optionally async, receiving `{ THREE, tsl, renderer, width, h
 | `sources`           | Optional source dependencies to snapshot, as file URLs or paths relative to the fixture. The fixture itself is always captured; transitive imports and assets are **not discovered automatically**. Declare every edited shader dependency.                      |
 | `dispose`           | Optional cleanup function for fixture resources. Async cleanup is awaited.                                                                                                                                                                                       |
 
-Use the supplied `THREE` and `tsl` when constructing fixture resources, and import the actual target graph where possible. The runner does not mount arbitrary R3F components: hooks, loaders, animation, React context, and app stores require an explicit fixture adapter. Prefer an existing exported node factory; the landing suite shows how a local R3F mount can reuse hook-owned graphs without copying their shader code. A browser fixture may still be necessary for browser-dependent behavior. Keep canonical shader code in its owning package, not copied into the plugin.
+Use the supplied `THREE` and `tsl` when constructing fixture resources, and import the actual target graph where possible. The runner does not mount arbitrary R3F components: hooks, loaders, animation, React context, and app stores require an explicit fixture adapter. Prefer an existing exported node factory; hook-owned graphs require a faithful R3F mount adapter. A browser fixture may still be necessary for browser-dependent behavior. Keep canonical shader code in its owning package, not copied into the plugin.
 
 The runner freezes built-in TSL `time`, `deltaTime`, and `frameId` at zero. Supply explicit fixed uniforms for other representative times, and deterministic input buffers/textures. Compute must produce a stable result on repeated dispatches; use `prepare` to restore a fixed input state before each simulation update. Include that state and reset policy in `workload`, and keep the output attribute order fixed across captures. Readbacks after warmup and after sampling must match exactly. Run distinct fixed scenarios when branches, coverage, or resource sizes affect cost.
 
