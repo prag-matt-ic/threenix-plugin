@@ -67,7 +67,6 @@ Catch performance problems, remove unnecessary complexity, and make Three.js, R3
 | [`best-practices`](skills/best-practices/SKILL.md) | Review and refactor Three.js and R3F code for performance and clarity.                |
 | [`clean-code`](skills/clean-code/SKILL.md)         | Review and refactor Typescript code against a Clean Code checklist.                   |
 | [`optimize-tsl`](skills/optimize-tsl/SKILL.md)     | Optimize Three.js Shading Language (TSL) nodes without changing their visible output. |
-| [`simplify`](skills/simplify/SKILL.md)             | Review the latest commit for duplication and unnecessary complexity.                  |
 
 For local before/after GPU measurements with `optimize-tsl`, see the [Node TSL benchmark guide](skills/optimize-tsl/BENCHMARK.md).
 
