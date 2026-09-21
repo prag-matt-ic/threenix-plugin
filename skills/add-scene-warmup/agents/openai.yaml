@@ -1,0 +1,10 @@
+interface:
+  display_name: 'Add Scene Warmup'
+  short_description: 'Reduce first-reveal stutter in WebGPU R3F scenes'
+  default_prompt: '$add-scene-warmup Fix first-entry stutter when meshes enter the camera frustum in my WebGPU React Three Fiber scene, with or without postprocessing.'
+
+dependencies:
+  tools:
+    - type: 'mcp'
+      value: 'threenix'
+      description: 'Threenix developer resources'

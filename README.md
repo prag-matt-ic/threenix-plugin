@@ -82,4 +82,5 @@ Ship WebGPU features faster by adding proven scene foundations and effects to an
 | [`add-fireworks`](skills/add-fireworks/SKILL.md)                                           | Add GPU compute fireworks to an existing WebGPU R3F scene.        |
 | [`add-linked-particles`](skills/add-linked-particles/SKILL.md)                             | Add GPU proximity-linked particles to an existing WebGPU scene.   |
 | [`add-mesh-surface-sampled-particles`](skills/add-mesh-surface-sampled-particles/SKILL.md) | Add a mesh-sampled Phoenix particle silhouette to a WebGPU scene. |
+| [`add-scene-warmup`](skills/add-scene-warmup/SKILL.md)                                     | Reduce first-reveal stutter with or without postprocessing.       |
 | [`add-webgpu-canvas`](skills/add-webgpu-canvas/SKILL.md)                                   | Create a WebGPU R3F canvas from the bundled Threenix reference.   |
