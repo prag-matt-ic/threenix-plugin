@@ -1,0 +1,4 @@
+interface:
+  display_name: 'R3F v10 WebGPU Hooks'
+  short_description: 'Use R3F v10 hooks with correct resource lifecycles'
+  default_prompt: 'Use $r3f-v10-webgpu-hooks to choose and implement the appropriate WebGPU hooks for my React Three Fiber scene.'

@@ -50,6 +50,7 @@ claude plugin install threenix@threenix
 
 - **Review an existing scene:** [`best-practices`](skills/best-practices/SKILL.md)
 - **Start a WebGPU scene:** [`add-webgpu-canvas`](skills/add-webgpu-canvas/SKILL.md)
+- **Use R3F v10 hooks:** [`r3f-v10-webgpu-hooks`](skills/r3f-v10-webgpu-hooks/SKILL.md)
 - **Add a visual effect:** [`add-fireworks`](skills/add-fireworks/SKILL.md)
 
 ## Skills
@@ -67,6 +68,7 @@ Catch performance problems, remove unnecessary complexity, and make Three.js, R3
 | [`best-practices`](skills/best-practices/SKILL.md) | Review and refactor Three.js and R3F code for performance and clarity.                |
 | [`clean-code`](skills/clean-code/SKILL.md)         | Review and refactor Typescript code against a Clean Code checklist.                   |
 | [`optimize-tsl`](skills/optimize-tsl/SKILL.md)     | Optimize Three.js Shading Language (TSL) nodes without changing their visible output. |
+| [`r3f-v10-webgpu-hooks`](skills/r3f-v10-webgpu-hooks/SKILL.md) | Choose WebGPU hooks and manage uniforms, graphs, buffers, textures, and pipeline lifecycles. |
 
 For local before/after GPU measurements with `optimize-tsl`, see the [Node TSL benchmark guide](skills/optimize-tsl/BENCHMARK.md).
 
