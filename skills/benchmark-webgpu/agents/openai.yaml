@@ -1,0 +1,4 @@
+interface:
+  display_name: "Benchmark WebGPU"
+  short_description: "Measure Three.js WebGPU render and compute work"
+  default_prompt: "$benchmark-webgpu Measure this WebGPU workload with a representative fixture and report GPU timing and output checks."

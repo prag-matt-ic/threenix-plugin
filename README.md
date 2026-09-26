@@ -63,14 +63,15 @@ Invoke a skill by name: `$best-practices` in Codex, `/best-practices` in Cursor 
 
 Catch performance problems, remove unnecessary complexity, and make Three.js, R3F, and TSL code easier to maintain.
 
-| Skill                                              | What it does                                                                          |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| [`best-practices`](skills/best-practices/SKILL.md) | Review and refactor Three.js and R3F code for performance and clarity.                |
-| [`clean-code`](skills/clean-code/SKILL.md)         | Review and refactor Typescript code against a Clean Code checklist.                   |
-| [`optimize-tsl`](skills/optimize-tsl/SKILL.md)     | Optimize Three.js Shading Language (TSL) nodes without changing their visible output. |
+| Skill                                                          | What it does                                                                                 |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| [`best-practices`](skills/best-practices/SKILL.md)             | Review and refactor Three.js and R3F code for performance and clarity.                       |
+| [`benchmark-webgpu`](skills/benchmark-webgpu/SKILL.md)         | Measure Three.js WebGPU render and compute workloads with GPU timestamps.                    |
+| [`clean-code`](skills/clean-code/SKILL.md)                     | Review and refactor Typescript code against a Clean Code checklist.                          |
+| [`optimize-tsl`](skills/optimize-tsl/SKILL.md)                 | Optimize Three.js Shading Language (TSL) nodes without changing their visible output.        |
 | [`r3f-v10-webgpu-hooks`](skills/r3f-v10-webgpu-hooks/SKILL.md) | Choose WebGPU hooks and manage uniforms, graphs, buffers, textures, and pipeline lifecycles. |
 
-For local before/after GPU measurements with `optimize-tsl`, see the [Node TSL benchmark guide](skills/optimize-tsl/BENCHMARK.md).
+For standalone baselines or before/after GPU comparisons, use [`benchmark-webgpu`](skills/benchmark-webgpu/SKILL.md) and its [Node benchmark guide](skills/benchmark-webgpu/BENCHMARK.md). `optimize-tsl` uses it when a shader change needs measurement.
 
 ### Add Components
 

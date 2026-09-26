@@ -1,16 +1,16 @@
-# Local TSL GPU benchmarks
+# Local Three.js WebGPU benchmarks
 
-Purpose: Capture a deterministic TSL workload before edits, then compare its GPU execution time and output after edits.
+Purpose: Capture a deterministic Three.js WebGPU workload for a standalone baseline or before/after GPU comparison.
 
-Read this before changing the benchmark runner or making performance claims with `optimize-tsl`.
+Read this before changing the benchmark runner or making GPU performance claims with `benchmark-webgpu`.
 
-Keywords: TSL, WGSL, WebGPU, GPU timestamps, Node, benchmark, shader optimization
+Keywords: Three.js, TSL, WGSL, WebGPU, GPU timestamps, Node, benchmark, render, compute
 
 The [Node runner](scripts/benchmark.mjs) uses the project's Three.js and native Dawn WebGPU to run an isolated render or compute fixture on the GPU. It records hardware timestamp samples, generated WGSL, source snapshots, and output bytes. This is a local prototype; automatic component extraction and plugin lifecycle hooks are not implemented.
 
 ## Quickstart from an installed skill
 
-Run in the target project's directory. The runner resolves `webgpu` and `three` from that directory, even when the script lives in a plugin cache. It uses `webgpu@0.6.0`, was developed against Three r184/r185, and has been checked with r186; retain the project's Three version and verify compatibility before comparing results.
+Run in the target project's directory. The runner resolves `webgpu` and `three` from that directory, even when the script lives in a plugin cache. It uses `webgpu@0.6.0` and was developed against Three r184/r185; retain the project's Three version and verify compatibility before comparing results.
 
 For a project that already installs Three:
 
@@ -40,20 +40,20 @@ export default function createFixture({ THREE, tsl }) {
 }
 ```
 
-Replace `/path/to/threenix` with the installed plugin or skills root containing `skills/optimize-tsl` (or use the actual `optimize-tsl/scripts/benchmark.mjs` path for a standalone skill installation):
+Replace `/path/to/threenix` with the installed plugin or skills root containing `skills/benchmark-webgpu` (or use the actual `benchmark-webgpu/scripts/benchmark.mjs` path for a standalone skill installation):
 
 ```sh
-node /path/to/threenix/skills/optimize-tsl/scripts/benchmark.mjs ./benchmarks/target.mjs --out .benchmarks/before
-node /path/to/threenix/skills/optimize-tsl/scripts/benchmark.mjs ./benchmarks/target.mjs --out .benchmarks/repeat --baseline .benchmarks/before/result.json
+node /path/to/threenix/skills/benchmark-webgpu/scripts/benchmark.mjs ./benchmarks/target.mjs --out .benchmarks/before
+node /path/to/threenix/skills/benchmark-webgpu/scripts/benchmark.mjs ./benchmarks/target.mjs --out .benchmarks/repeat --baseline .benchmarks/before/result.json
 ```
 
-Each output directory must be new. The unchanged repeat establishes local timing noise. For an actual optimization, replace the synthetic fixture with one importing the target graph, capture a new baseline **before editing** in `.benchmarks/target-before`, then run the edited graph with `--out .benchmarks/target-after --baseline .benchmarks/target-before/result.json`. Keep the baseline directory intact. The synthetic example measures only its own workload, not the performance of a component.
+Each output directory must be new. The unchanged repeat establishes local timing noise. For a standalone measurement, report the baseline and repeat without claiming a speedup. For an actual optimization, replace the synthetic fixture with one importing the target code, capture a new baseline **before editing** in `.benchmarks/target-before`, then run the edited code with `--out .benchmarks/target-after --baseline .benchmarks/target-before/result.json`. Keep the baseline directory intact. The synthetic example measures only its own workload, not the performance of a component.
 
 For TypeScript/TSX fixtures, add `--import tsx` after `node`. App-specific aliases and browser asset imports must also resolve in Node.
 
 ## Threenix component references
 
-Installed skills do not include the Threenix monorepo, its benchmark fixtures, or package assets. Retrieve component references exclusively through `get_component_reference` on the `threenix` MCP server, using the [particle reference slugs](SKILL.md#retrieve-particle-references-through-mcp). Preserve returned `files[]` paths and decode each file according to its `encoding`; source is UTF-8 and binary assets are base64. Do not import private package paths, fetch assets through alternate routes, or reconstruct unavailable references. If MCP access fails, report the limitation and continue only with the user's available code or the synthetic harness example.
+Installed skills do not include the Threenix monorepo, its benchmark fixtures, or package assets. When a Threenix particle reference is relevant, retrieve `fireworks`, `linked-particles`, or `mesh-surface-sampled-particles` through `get_component_reference` on the `threenix` MCP server. Preserve returned `files[]` paths and decode each file according to its `encoding`; source is UTF-8 and binary assets are base64. Do not import private package paths, fetch assets through alternate routes, or reconstruct unavailable references. If MCP access fails, report the limitation and continue only with the user's available code or the synthetic harness example.
 
 Build a fixture adapter around the retrieved production graph when it can run faithfully in Node. The MCP response does not provide monorepo benchmark scripts, demos, or a ready-made fixture. Browser-dependent components may require a browser benchmark instead.
 
@@ -71,10 +71,10 @@ Export a function, optionally async, receiving `{ THREE, tsl, renderer, width, h
 | `compute`           | Compute fixture instead: a `ComputeNode` or array. The runner submits the node(s) once per sample.                                                                                                                                                               |
 | `output`, `outputs` | Compute output: one `StorageBufferAttribute` or `StorageInstancedBufferAttribute` in `output`, or a nonempty array of those attributes in `outputs`. When supplied, `outputs` takes precedence. The runner concatenates their raw readback bytes in array order. |
 | `prepare`           | Optional async setup/reset function, called before every warmup and measured sample. Its work is excluded from timing; the runner resolves both compute and render timestamp pools afterward, before submitting the measured pass.                               |
-| `sources`           | Optional source dependencies to snapshot, as file URLs or paths relative to the fixture. The fixture itself is always captured; transitive imports and assets are **not discovered automatically**. Declare every edited shader dependency.                      |
+| `sources`           | Optional source dependencies to snapshot, as file URLs or paths relative to the fixture. The fixture itself is always captured; transitive imports and assets are **not discovered automatically**. Declare every edited source dependency.                      |
 | `dispose`           | Optional cleanup function for fixture resources. Async cleanup is awaited.                                                                                                                                                                                       |
 
-Use the supplied `THREE` and `tsl` when constructing fixture resources, and import the actual target graph where possible. The runner does not mount arbitrary R3F components: hooks, loaders, animation, React context, and app stores require an explicit fixture adapter. Prefer an existing exported node factory; hook-owned graphs require a faithful R3F mount adapter. A browser fixture may still be necessary for browser-dependent behavior. Keep canonical shader code in its owning package, not copied into the plugin.
+Use the supplied `THREE` and `tsl` when constructing fixture resources, and import the actual target code where possible. The runner does not mount arbitrary R3F components: hooks, loaders, animation, React context, and app stores require an explicit fixture adapter. Prefer an existing exported node factory; hook-owned graphs require a faithful R3F mount adapter. A browser fixture may still be necessary for browser-dependent behavior. Keep canonical source in its owning package, not copied into the plugin.
 
 The runner freezes built-in TSL `time`, `deltaTime`, and `frameId` at zero. Supply explicit fixed uniforms for other representative times, and deterministic input buffers/textures. Compute must produce a stable result on repeated dispatches; use `prepare` to restore a fixed input state before each simulation update. Include that state and reset policy in `workload`, and keep the output attribute order fixed across captures. Readbacks after warmup and after sampling must match exactly. Run distinct fixed scenarios when branches, coverage, or resource sizes affect cost.
 
@@ -82,7 +82,7 @@ The runner freezes built-in TSL `time`, `deltaTime`, and `frameId` at zero. Supp
 
 Each sample submits one `renderer.render()` or `renderer.compute()` call and resolves its GPU timestamps. Render compilation and warmup precede sampling; `prepare` and output readback happen outside it. The reported milliseconds measure the GPU pass workload, including rasterization, memory traffic, blending and other relevant GPU work. They exclude fixture resets and do not isolate vertex time from fragment time or measure React/CPU overhead, shader compilation latency, or application FPS.
 
-Three resolves the last frame's accumulated pass duration, so this runner resolves every sample separately. See the [r184 timestamp implementation](https://github.com/mrdoob/three.js/blob/r184/src/renderers/webgpu/utils/WebGPUTimestampQueryPool.js) and [renderer implementation](https://github.com/mrdoob/three.js/blob/r184/src/renderers/common/Renderer.js); `resolveTimestampsAsync` and the backend query pool still work this way in `three@0.186.0`.
+Three resolves the last frame's accumulated pass duration, so this runner resolves every sample separately. See the [r184 timestamp implementation](https://github.com/mrdoob/three.js/blob/r184/src/renderers/webgpu/utils/WebGPUTimestampQueryPool.js) and [renderer implementation](https://github.com/mrdoob/three.js/blob/r184/src/renderers/common/Renderer.js); `resolveTimestampsAsync` and the backend query pool still work this way in `three@0.185.0`.
 
 Captured `shader-*.wgsl` files are the modules submitted to the device, including any support shaders. WGSL alone is not a replayable component: geometry, bind groups, buffers, textures, pipeline flags and render targets determine execution. The fixture recreates that resource context; exported source is an inspection artifact, not a machine-instruction count or a standalone benchmark input.
 

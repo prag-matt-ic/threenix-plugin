@@ -29,7 +29,7 @@ For full TSL documentation refer to: https://github.com/mrdoob/three.js/wiki/Thr
    - State the suspected bottleneck and the evidence for it. Treat vertex/fragment/bandwidth limits as hypotheses until profiling supports them; pass timing alone does not identify the limiting stage.
    - Map the heavy work to stage: `material.positionNode`/`geometryNode` is vertex-stage, `material.colorNode`/`fragmentNode`/postprocessing is fragment-stage.
    - Note any `vertexStage()` / `varying()` usage and whether it matches the actual consumption site.
-   - When benchmarking is requested or a suitable local fixture is available, follow [BENCHMARK.md](BENCHMARK.md): import the actual target graph into a deterministic render/compute fixture, declare shader source dependencies, and capture the baseline **before editing**. Take an unchanged repeat to establish noise. If a faithful fixture cannot run locally, state the limitation and keep performance estimates unmeasured.
+   - When benchmarking is requested or a suitable local fixture is available, use the standalone `$benchmark-webgpu` skill to measure the actual target graph. Capture its baseline **before editing** and an unchanged repeat to establish noise. If that skill or a faithful fixture is unavailable, state the limitation and keep performance estimates unmeasured.
 
 2. **Static audit (find issues)**
    - Unused or redundant nodes, uniforms, varyings, or cached vars (`toVar`).
@@ -58,7 +58,7 @@ For full TSL documentation refer to: https://github.com/mrdoob/three.js/wiki/Thr
    - **Keep interfaces lean:** only emit nodes/varyings that are actually consumed; preserve slot semantics.
 
 5. **Output (deliverables)**
-   - **Measured comparison, when captured:** run the same fixture/settings after edits with `--baseline` pointing to the saved `result.json`. Inspect output differences and repeat A/B runs before claiming a win. Report GPU pass timing separately from stage hypotheses and application FPS; include artifact paths and any inconclusive result. See [benchmark interpretation](BENCHMARK.md#reading-results).
+   - **Measured comparison, when captured:** use `$benchmark-webgpu` with the same fixture/settings and saved baseline after edits. Inspect output differences and repeat A/B runs before claiming a win. Report GPU pass timing separately from stage hypotheses and application FPS; include artifact paths and any inconclusive result.
    - **Findings table**
      | Issue | Location | Severity | Fix summary |
      | ----- | -------- | -------- | ----------- |
@@ -136,11 +136,11 @@ const positionNode = positionLifeBuffer.toAttribute().xyz
 
 The installed skill does not include the Threenix monorepo or component sources. When a concrete reference would help, call `get_component_reference` on the `threenix` MCP server with one of the following arguments and inspect the returned `files[]`. Fetch only the reference relevant to the optimization; do not assume local `packages/` or `apps/` paths exist or copy a component into the user's project just to review it.
 
-| Tool arguments | Pattern to inspect |
-| --- | --- |
-| `{ "slug": "fireworks" }` | Position/life, velocity/scale, RGB/sprite frame, and batch/seed/phase/scale-fade metadata packed into `vec4`s; lane-specific initialization, spawning, and updates; elapsed simulation time for throttled updates. |
-| `{ "slug": "linked-particles" }` | Position/life packing; opportunities to combine velocity and seed after auditing all readers/writers. Include link-output storage in binding counts and review neighbor reads during position writes for races. |
-| `{ "slug": "mesh-surface-sampled-particles" }` | Separate initial and mutable positions preserve the rest shape; do not remove the immutable buffer merely to reduce the buffer count. |
+| Tool arguments                                 | Pattern to inspect                                                                                                                                                                                                 |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `{ "slug": "fireworks" }`                      | Position/life, velocity/scale, RGB/sprite frame, and batch/seed/phase/scale-fade metadata packed into `vec4`s; lane-specific initialization, spawning, and updates; elapsed simulation time for throttled updates. |
+| `{ "slug": "linked-particles" }`               | Position/life packing; opportunities to combine velocity and seed after auditing all readers/writers. Include link-output storage in binding counts and review neighbor reads during position writes for races.    |
+| `{ "slug": "mesh-surface-sampled-particles" }` | Separate initial and mutable positions preserve the rest shape; do not remove the immutable buffer merely to reduce the buffer count.                                                                              |
 
 Treat returned sources as authoritative: inspect their current layout rather than assuming these patterns are unchanged or fully optimized. If the tool or server is unavailable, report that the reference could not be retrieved; do not reconstruct it from local or bundled sources. The self-contained guidance above can still be applied to the user's supplied code.
 
