@@ -10,7 +10,7 @@ The [Node runner](scripts/benchmark.mjs) uses the project's Three.js and native 
 
 ## Quickstart from an installed skill
 
-Run in the target project's directory. The runner resolves `webgpu` and `three` from that directory, even when the script lives in a plugin cache. It uses `webgpu@0.6.0` and was developed against Three r184/r185; retain the project's Three version and verify compatibility before comparing results.
+Run in the target project's directory. The runner resolves `webgpu` and `three` from that directory, even when the script lives in a plugin cache. It uses `webgpu@0.6.0`, was developed against Three r184/r185, and has been checked with r186; retain the project's Three version and verify compatibility before comparing results.
 
 For a project that already installs Three:
 
@@ -82,7 +82,7 @@ The runner freezes built-in TSL `time`, `deltaTime`, and `frameId` at zero. Supp
 
 Each sample submits one `renderer.render()` or `renderer.compute()` call and resolves its GPU timestamps. Render compilation and warmup precede sampling; `prepare` and output readback happen outside it. The reported milliseconds measure the GPU pass workload, including rasterization, memory traffic, blending and other relevant GPU work. They exclude fixture resets and do not isolate vertex time from fragment time or measure React/CPU overhead, shader compilation latency, or application FPS.
 
-Three resolves the last frame's accumulated pass duration, so this runner resolves every sample separately. See the [r184 timestamp implementation](https://github.com/mrdoob/three.js/blob/r184/src/renderers/webgpu/utils/WebGPUTimestampQueryPool.js) and [renderer implementation](https://github.com/mrdoob/three.js/blob/r184/src/renderers/common/Renderer.js); `resolveTimestampsAsync` and the backend query pool still work this way in `three@0.185.0`.
+Three resolves the last frame's accumulated pass duration, so this runner resolves every sample separately. See the [r184 timestamp implementation](https://github.com/mrdoob/three.js/blob/r184/src/renderers/webgpu/utils/WebGPUTimestampQueryPool.js) and [renderer implementation](https://github.com/mrdoob/three.js/blob/r184/src/renderers/common/Renderer.js); `resolveTimestampsAsync` and the backend query pool still work this way in `three@0.186.0`.
 
 Captured `shader-*.wgsl` files are the modules submitted to the device, including any support shaders. WGSL alone is not a replayable component: geometry, bind groups, buffers, textures, pipeline flags and render targets determine execution. The fixture recreates that resource context; exported source is an inspection artifact, not a machine-instruction count or a standalone benchmark input.
 

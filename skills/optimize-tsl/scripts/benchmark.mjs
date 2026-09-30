@@ -355,7 +355,7 @@ async function main() {
     try {
       await fixture?.dispose?.()
       target?.dispose()
-      renderer?.dispose()
+      await renderer?.dispose()
     } finally {
       device.destroy()
     }
