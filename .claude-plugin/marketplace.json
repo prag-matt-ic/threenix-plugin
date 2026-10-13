@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "threenix",
-  "description": "Threenix skills and references for Three.js developers.",
+  "description": "Integrate Three.js components, review scene performance, benchmark WebGPU workloads, and optimize TSL shaders with Threenix skills.",
   "owner": {
     "name": "Threenix",
     "url": "https://developers.threenix.io"
@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "threenix",
-      "description": "Three.js workflow skills and reference components.",
+      "description": "Integrate Three.js components, review scene performance, benchmark WebGPU workloads, and optimize TSL shaders with Threenix skills.",
       "source": "./",
       "category": "development"
     }

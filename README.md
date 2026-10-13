@@ -89,6 +89,10 @@ The skill requires the public Threenix MCP endpoint at `https://developers.three
 
 Canonical source, dependencies, and integration notes come from MCP. Large asset collections download directly to disk, preserving relative paths without placing binary data in model context. Existing renderers and dependency ranges are preserved; WebGL migration is a separate task.
 
+## Agent discovery
+
+The developers site publishes an [ARD manifest](https://developers.threenix.io/.well-known/ard.json) describing all six skills with example tasks and links to their canonical `SKILL.md` files. ARD helps compatible discovery services find the skills; it does not install them or guarantee indexing. Follow the installation instructions above to include supporting scripts and references, and connect MCP when using `threenix-add-component`.
+
 ## Startup updates
 
 Codex and Claude Code marketplace installs (v0.8.0+) check for updates when you start or resume a session and can update the plugin and its skills automatically. This requires Node 20+, Git and the relevant CLI, plus hook approval in Codex. Existing users need one manual plugin update to enable it. Start a new session to load updated skills. Failed checks let work continue. Skills CLI installs and pinned or local copies aren’t updated automatically.

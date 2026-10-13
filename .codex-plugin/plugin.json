@@ -1,7 +1,7 @@
 {
   "name": "threenix",
-  "version": "0.10.0",
-  "description": "Threenix references and skills for Three.js developers.",
+  "version": "0.10.1",
+  "description": "Integrate Three.js components, review scene performance, benchmark WebGPU workloads, and optimize TSL shaders with Threenix skills.",
   "author": {
     "name": "Threenix"
   },
@@ -11,7 +11,7 @@
   "interface": {
     "displayName": "Threenix",
     "shortDescription": "Three.js workflows and reference components",
-    "longDescription": "Set up WebGPU canvases, review Three.js code, optimize TSL shaders, and integrate reference components with Threenix skills.",
+    "longDescription": "Integrate Three.js components, review scene performance, benchmark WebGPU workloads, and optimize TSL shaders with Threenix skills.",
     "developerName": "Threenix",
     "category": "Developer Tools",
     "capabilities": ["Read"],

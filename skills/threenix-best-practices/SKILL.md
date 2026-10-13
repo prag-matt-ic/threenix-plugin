@@ -1,6 +1,6 @@
 ---
 name: threenix-best-practices
-description: Review and refactor Three.js and React Three Fiber code for performance and clarity. Use when the user invokes $threenix-best-practices or asks for a Three.js or R3F threenix-best-practices review.
+description: Review and refactor Three.js and React Three Fiber scenes for performance and clarity. Use for scene performance reviews, excessive render-loop allocations, unnecessary React updates, and duplicated geometry, materials, or textures.
 ---
 
 ## Task

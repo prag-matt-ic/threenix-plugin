@@ -1,6 +1,6 @@
 ---
 name: threenix-clean-code
-description: Use the following Clean Code Checklist to review and refactor the current file's code.
+description: Review and refactor TypeScript and React code for readability. Use for unclear naming, complex control flow, oversized functions, and focused code-quality reviews.
 ---
 
 ## Task

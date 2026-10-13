@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "threenix",
   "displayName": "Threenix",
-  "version": "0.10.0",
-  "description": "Threenix references and skills for Three.js developers.",
+  "version": "0.10.1",
+  "description": "Integrate Three.js components, review scene performance, benchmark WebGPU workloads, and optimize TSL shaders with Threenix skills.",
   "author": {
     "name": "Threenix"
   },
