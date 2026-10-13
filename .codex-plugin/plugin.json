@@ -1,6 +1,6 @@
 {
   "name": "threenix",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Threenix references and skills for Three.js developers.",
   "author": {
     "name": "Threenix"
@@ -16,7 +16,9 @@
     "category": "Developer Tools",
     "capabilities": ["Read"],
     "websiteURL": "https://developers.threenix.io",
-    "defaultPrompt": ["$threenix-add-fireworks Add fireworks to my existing WebGPU R3F scene."]
+    "defaultPrompt": [
+      "$threenix-add-component fireworks Add fireworks to my existing WebGPU R3F scene."
+    ]
   },
   "mcpServers": "./.mcp.json"
 }

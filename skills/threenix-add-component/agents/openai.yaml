@@ -1,0 +1,11 @@
+interface:
+  display_name: 'Add a Threenix Component'
+  short_description: 'Discover and integrate Threenix scene resources'
+  default_prompt: '$threenix-add-component Add the requested scene feature using the Threenix library.'
+dependencies:
+  tools:
+    - type: 'mcp'
+      value: 'threenix'
+      description: 'Discover and retrieve canonical Threenix component references'
+      transport: 'streamable_http'
+      url: 'https://developers.threenix.io/mcp'

@@ -49,9 +49,9 @@ claude plugin install threenix@threenix
 ## Start here
 
 - **Review an existing scene:** [`threenix-best-practices`](skills/threenix-best-practices/SKILL.md)
-- **Start a WebGPU scene:** [`threenix-add-webgpu-canvas`](skills/threenix-add-webgpu-canvas/SKILL.md)
+- **Start a WebGPU scene:** `$threenix-add-component webgpu-canvas`
 - **Use R3F v10 hooks:** [`threenix-r3f-v10-webgpu-hooks`](skills/threenix-r3f-v10-webgpu-hooks/SKILL.md)
-- **Add a visual effect:** [`threenix-add-fireworks`](skills/threenix-add-fireworks/SKILL.md)
+- **Add a visual effect:** `$threenix-add-component fireworks`
 
 ## Skills
 
@@ -59,7 +59,7 @@ Start a new task or session after installing. For focused reviews, `@`-mention t
 
 Invoke a skill by name: `$threenix-best-practices` in Codex, `/threenix-best-practices` in Cursor or Claude Code when installed through the Skills CLI, or `/threenix:threenix-best-practices` with the Claude Code plugin.
 
-From v0.9.0, all 13 skill names use the `threenix-` prefix. For example, `optimize-tsl` becomes `threenix-optimize-tsl`. The old skill names are no longer provided. Update your installation, use the prefixed commands, and start a new session to load them. The plugin installation name remains `threenix@threenix`.
+The plugin provides six skills: one for adding components, plus focused review, benchmark, optimization, and WebGPU hooks workflows.
 
 ### Review / Refactor
 
@@ -77,18 +77,17 @@ For standalone baselines or before/after GPU comparisons, use [`threenix-benchma
 
 ### Add Components
 
-Add WebGPU scene foundations and effects to an existing project.
+[`threenix-add-component`](skills/threenix-add-component/SKILL.md) discovers the live library through `list_components`, then fetches only the selected `get_component_reference`. It supports components, hooks, Canvas setup, backgrounds, and scene warmup without bundling their source or a fixed catalogue.
 
-| Skill                                                                                                        | What it does                                                      |
-| ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
-| [`threenix-add-background-node`](skills/threenix-add-background-node/SKILL.md)                               | Add a custom TSL background to an existing WebGPU R3F canvas.     |
-| [`threenix-add-camera-controls`](skills/threenix-add-camera-controls/SKILL.md)                               | Add cinematic camera controls to an existing R3F scene.           |
-| [`threenix-add-fast-text`](skills/threenix-add-fast-text/SKILL.md)                                           | Add fast canvas-backed text to an existing WebGPU R3F scene.      |
-| [`threenix-add-fireworks`](skills/threenix-add-fireworks/SKILL.md)                                           | Add GPU compute fireworks to an existing WebGPU R3F scene.        |
-| [`threenix-add-linked-particles`](skills/threenix-add-linked-particles/SKILL.md)                             | Add GPU proximity-linked particles to an existing WebGPU scene.   |
-| [`threenix-add-mesh-surface-sampled-particles`](skills/threenix-add-mesh-surface-sampled-particles/SKILL.md) | Add a mesh-sampled Phoenix particle silhouette to a WebGPU scene. |
-| [`threenix-add-scene-warmup`](skills/threenix-add-scene-warmup/SKILL.md)                                     | Reduce first-reveal stutter with or without postprocessing.       |
-| [`threenix-add-webgpu-canvas`](skills/threenix-add-webgpu-canvas/SKILL.md)                                   | Create a WebGPU R3F canvas from the bundled Threenix reference.   |
+| Editor              | Example                                      |
+| ------------------- | -------------------------------------------- |
+| Codex               | `$threenix-add-component fireworks`          |
+| Claude Code plugin  | `/threenix:threenix-add-component fireworks` |
+| Cursor / Skills CLI | `/threenix-add-component fireworks`          |
+
+The skill requires the public Threenix MCP endpoint at `https://developers.threenix.io/mcp`; no API key is needed. Marketplace installs include its configuration. Skills CLI users must also connect that MCP server in their agent. If the connection fails, installation stops with an explanation.
+
+Canonical source, dependencies, and integration notes come from MCP. Large asset collections download directly to disk, preserving relative paths without placing binary data in model context. Existing renderers and dependency ranges are preserved; WebGL migration is a separate task.
 
 ## Startup updates
 
