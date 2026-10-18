@@ -5,9 +5,9 @@ description: Choose, implement, or debug React Three Fiber v10 WebGPU hooks for 
 
 # R3F v10 WebGPU hooks
 
-Use this reference in an existing R3F v10 project. Inspect the target's installed `@react-three/fiber`, `three`, and Three typings before changing code; alpha APIs and lifecycle behavior differ from upstream docs. Resolve dependencies from the target workspace, then inspect Fiber's `dist/webgpu/index.d.ts` and `index.mjs` for the relevant hook. Do not upgrade packages or migrate a WebGL canvas merely to apply this skill.
+Use this reference in an existing R3F v10 project. Inspect the target's installed `@react-three/fiber`, `three`, and Three typings before changing code; alpha APIs and lifecycle behavior differ from upstream docs. Resolve dependencies from the target workspace, then inspect Fiber's `dist/index.d.ts` and `@react-three/tsl/dist/index.d.ts` and `index.mjs` for the relevant hook. Do not upgrade packages or migrate a WebGL canvas merely to apply this skill.
 
-Import scene hooks from `@react-three/fiber/webgpu`, Three classes/types from `three/webgpu`, and shader expressions from `three/tsl`. Call scene hooks beneath the matching Canvas. The WebGPU entry already types `state.renderer` as `WebGPURenderer`; no cast is needed.
+For alpha.6, import TSL hooks (`useUniforms`, `useLocalNodes`, `useBuffers`, `useGPUStorage`, `useNodes`, `useUniform`, `useRenderPipeline`) and `CreatorState` from `@react-three/tsl`. Import Canvas, texture hooks and scene hooks from `@react-three/fiber`, Three classes/types from `three/webgpu`, and shader expressions from `three/tsl`. Call scene hooks beneath the matching Canvas. The WebGPU entry already types `state.renderer` as `WebGPURenderer`; no cast is needed.
 
 ## Choose the hook
 
@@ -38,7 +38,8 @@ Mount `Parent` beneath the Canvas. It creates and updates `uAmount` in the `scen
 ```tsx
 'use client'
 
-import { useFrame, useLocalNodes, useUniforms } from '@react-three/fiber/webgpu'
+import { useFrame } from '@react-three/fiber'
+import { useLocalNodes, useUniforms } from '@react-three/tsl'
 import type { FC } from 'react'
 import { normalLocal, positionLocal } from 'three/tsl'
 import type { UniformNode } from 'three/webgpu'
@@ -70,7 +71,7 @@ const Child: FC = () => {
 }
 ```
 
-- Inline local creators are fine for small graphs; they may run again on each React render. Stabilize expensive creators with `useCallback` and include every captured graph input in its dependencies.
+- Inline local creators are fine for small graphs; they may run again on each React render. Pass an explicit dependency array for expensive graphs: `useLocalNodes(creator, [creator])` preserves a memoized creator, and `useLocalNodes(() => ..., [input])` tracks captured inputs. `[]` builds once unless a resource actually read by the graph is replaced; omitting dependencies rebuilds every render, even with `useCallback`.
 - Changing a uniform value does not rebuild a graph. Compose with the uniform node, not a captured `.value`. Use TSL `select` or `If` inside `Fn` for GPU-time branching; a JavaScript `if` selects a graph at creation time.
 - Creator registration can be staged until a layout effect. Reader hooks in another component can initially return an empty scope. Check readiness before using external entries; a TypeScript generic does not prove registration happened. Keep hooks unconditional and establish the resource owner before consumers.
 - Infer types from creators. Use reader-mode schema generics and `.scope<Schema>(name)` only at shared boundaries; import `CreatorState`, `UniformNode`, and other library types instead of redefining them.
@@ -88,7 +89,7 @@ const createBuffers = useCallback(
   [count],
 )
 const { positions } = useBuffers(createBuffers, scope)
-// Import instancedArray from three/tsl and useBuffers from the WebGPU entry.
+// Import instancedArray from three/tsl and useBuffers from @react-three/tsl.
 // Compute: positions.element(instanceIndex); rendering: positions.toAttribute().xyz.
 
 const createStorage = useCallback(
@@ -98,7 +99,7 @@ const createStorage = useCallback(
   [width, height],
 )
 const storage = useGPUStorage(createStorage, `field${instanceKey}W${width}H${height}`)
-// Import StorageTexture from three/webgpu and useGPUStorage from the WebGPU entry.
+// Import StorageTexture from three/webgpu and useGPUStorage from @react-three/tsl.
 ```
 
 These are registration examples, not complete ownership/cleanup implementations. Use scopes that distinguish independent owners and every allocation-defining input (count, dimensions, layout, and source generation when applicable). Initialize replacement buffers before compute or drawing reads them, and rebind dependent graphs to the replacement resources.
@@ -113,7 +114,7 @@ Pass the scope explicitly to lifecycle utilities, e.g. `disposeStorage(['field']
 
 Rebuilds can replace resource identities. Refresh material/compute graphs and callbacks that captured the outgoing generation. A compute node's disposal does not imply its storage allocation was released; inspect the underlying attribute/texture and renderer ownership path.
 
-**For alpha.5 or uncertain lifecycle behavior, read [references/alpha-5.md](references/alpha-5.md) before implementing replacement or teardown.** It records implementation limits that the generic API descriptions miss.
+Alpha.6 still stages registered resources and does not ref-count `useScopedResource` on unmount. Buffer disposal calls the registered object’s `.dispose()`; verify underlying attribute ownership separately. Keep allocation-specific scopes and explicit cleanup. [Alpha.5 findings](references/alpha-5.md) are historical evidence, not the alpha.6 API contract.
 
 ## Texture loading and sharing
 
@@ -128,8 +129,8 @@ Mounted `useTexture` consumers do not subscribe to later registry replacements; 
 `useRenderPipeline(mainCB, setupCB)` calls **setup before main**. Configure MRT on `passes.scenePass` in setup; compose its texture nodes into `renderPipeline.outputNode` in main. The return includes `isReady`, nullable `renderPipeline`, `passes`, `rebuild`, `reset`, and `clearPasses`.
 
 - Use one configuring owner per root. R3F's default render job renders the pipeline; registering a `useFrame` job in the `render` phase takes over rendering and disables that default job.
-- Callback identity or captured prop changes alone do not rebuild the graph in alpha.5. Update numeric uniforms directly; call `rebuild()` for structural changes. Check `isReady` before using the returned pipeline.
-- The hook persists across unmount. In alpha.5, `reset()` clears root state and disposes the cached scene pass, but not the pipeline or custom passes/effects. The configuring owner must release what it owns; `clearPasses()` alone is not disposal.
+- Callback identity or captured prop changes alone do not rebuild the graph. Replacement of resources read by the callbacks does trigger rebuilding. Update numeric uniforms directly; call `rebuild()` for structural changes. Check `isReady` before using the returned pipeline.
+- The configuring hook owns and disposes its pipeline and scene pass on unmount; `reset()` releases them immediately. Do not dispose those objects again in component cleanup. Dispose custom effect nodes yourself. The third argument `{ persist: true }` opts into persistence; use it only when explicitly needed. `clearPasses()` alone is not disposal.
 - Keep explicit Three `RenderPipeline` ownership when several independent pipelines or manual switching are required. Do not introduce competing root owners.
 
 ## Other application hooks and prop helpers
@@ -153,3 +154,7 @@ Mounted `useTexture` consumers do not subscribe to later registry replacements; 
 Run the target's type-check and narrowest relevant lint/runtime check. For resource changes, exercise two independent instances, an unrelated re-render, allocation resize/replacement, unmount/remount, and fast refresh if supported. Verify both rendered/compute results and actual cleanup; type-checking alone cannot prove GPU memory was released. Avoid material keys based on newly created node UUIDs, which force avoidable remounts.
 
 Upstream references: [TSL hooks](https://github.com/pmndrs/react-three-fiber/blob/v10/docs/webgpu/tsl-hooks.mdx), [render pipeline](https://github.com/pmndrs/react-three-fiber/blob/v10/docs/webgpu/render-pipeline.mdx), [core hooks](https://github.com/pmndrs/react-three-fiber/blob/v10/docs/API/hooks.mdx), [v10 migration](https://github.com/pmndrs/react-three-fiber/blob/v10/docs/migration/v10.mdx), [TSL HMR](https://github.com/pmndrs/react-three-fiber/blob/v10/docs/webgpu/hmr.mdx). Prefer installed implementation and types when the moving `v10` docs disagree.
+
+## Canvas sharing in alpha.6
+
+Use `Canvas` from `@react-three/fiber` for WebGPU, or `/legacy` for the old WebGLRenderer. Mark the renderer owner `<Canvas id="main" primary>`, target it with `share="main"`, and pass `scheduler={{ after: "main" }}` directly on secondary canvases. Use `share={false}` for independent previews. `/webgpu` is deprecated. Pin both Fiber and TSL to `10.0.0-alpha.6` for this reference.
