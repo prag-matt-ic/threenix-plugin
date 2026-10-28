@@ -52,6 +52,7 @@ claude plugin install threenix@threenix
 - **Start a WebGPU scene:** `$threenix-add-component webgpu-canvas`
 - **Use R3F v10 hooks:** [`threenix-r3f-v10-webgpu-hooks`](skills/threenix-r3f-v10-webgpu-hooks/SKILL.md)
 - **Add a visual effect:** `$threenix-add-component fireworks`
+- **Add touch input:** `$threenix-add-component joystick`
 
 ## Skills
 
@@ -77,7 +78,7 @@ For standalone baselines or before/after GPU comparisons, use [`threenix-benchma
 
 ### Add Components
 
-[`threenix-add-component`](skills/threenix-add-component/SKILL.md) discovers the live library through `list_components`, then fetches only the selected `get_component_reference`. It supports components, hooks, Canvas setup, backgrounds, and scene warmup without bundling their source or a fixed catalogue.
+[`threenix-add-component`](skills/threenix-add-component/SKILL.md) discovers the live library through `list_components`, then fetches only the selected `get_component_reference`. It supports scene components, DOM input controls, hooks, Canvas setup, backgrounds, and scene warmup without bundling their source or a fixed catalogue. DOM-only resources such as joystick do not require Three.js or a Canvas.
 
 | Editor              | Example                                      |
 | ------------------- | -------------------------------------------- |

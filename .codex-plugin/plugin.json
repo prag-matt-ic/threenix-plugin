@@ -1,6 +1,6 @@
 {
   "name": "threenix",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "description": "Integrate Three.js components, review scene performance, benchmark WebGPU workloads, and optimize TSL shaders with Threenix skills.",
   "author": {
     "name": "Threenix"
