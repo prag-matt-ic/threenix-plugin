@@ -1,6 +1,6 @@
 ---
 name: threenix-benchmark-webgpu
-description: Measure Three.js WebGPU render or compute workloads with deterministic GPU timestamp fixtures. Use for standalone performance baselines or before/after comparisons, including TSL work.
+description: Measure Three.js WebGPU render or compute workloads with deterministic GPU timestamp fixtures. Use for standalone performance baselines, frame-time comparisons, or before/after checks, including TSL work.
 ---
 
 # Benchmark Three.js WebGPU work

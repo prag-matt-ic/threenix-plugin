@@ -1,6 +1,6 @@
 ---
-name: threenix-clean-code
-description: Review and refactor TypeScript and React code for readability. Use for unclear naming, complex control flow, oversized functions, and focused code-quality reviews.
+name: threenix-threejs-clean-code
+description: Review and refactor TypeScript and React code for readability in Three.js and React Three Fiber projects. Use for unclear naming, complex control flow, oversized functions, and focused code-quality reviews.
 ---
 
 ## Task

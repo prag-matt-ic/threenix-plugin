@@ -1,6 +1,6 @@
 ---
-name: threenix-best-practices
-description: Review and refactor Three.js and React Three Fiber scenes for performance and clarity. Use for scene performance reviews, excessive render-loop allocations, unnecessary React updates, and duplicated geometry, materials, or textures.
+name: threenix-threejs-best-practices
+description: Review and refactor Three.js and React Three Fiber scenes for performance and clarity. Use when a scene stutters, drops frames, allocates objects per frame, re-renders React components unnecessarily, or duplicates geometry, materials, or textures; also for a general R3F performance review.
 ---
 
 ## Task

@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Three.js Clean Code Review'
+  short_description: 'Review TypeScript and R3F code for readability'
+  default_prompt: '$threenix-threejs-clean-code Review this code against the Clean Code checklist and make the smallest useful improvements.'

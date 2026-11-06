@@ -1,6 +1,6 @@
 ---
-name: threenix-r3f-v10-webgpu-hooks
-description: Choose, implement, or debug React Three Fiber v10 WebGPU hooks for TSL uniforms, node graphs, buffers, storage textures, texture loading, and render pipelines. Use for R3F v10 hook migrations and resource lifecycle issues.
+name: threenix-r3f-webgpu-hooks
+description: Choose, implement, or debug React Three Fiber v10 WebGPU hooks for TSL uniforms, node graphs, buffers, storage textures, texture loading, and render pipelines. Use for R3F v10 WebGPU hook migrations and resource lifecycle issues.
 ---
 
 # R3F v10 WebGPU hooks

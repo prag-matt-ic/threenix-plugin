@@ -48,9 +48,9 @@ claude plugin install threenix@threenix
 
 ## Start here
 
-- **Review an existing scene:** [`threenix-best-practices`](skills/threenix-best-practices/SKILL.md)
+- **Review an existing scene:** [`threenix-threejs-best-practices`](skills/threenix-threejs-best-practices/SKILL.md)
 - **Start a WebGPU scene:** `$threenix-add-component webgpu-canvas`
-- **Use R3F v10 hooks:** [`threenix-r3f-v10-webgpu-hooks`](skills/threenix-r3f-v10-webgpu-hooks/SKILL.md)
+- **Use R3F v10 hooks:** [`threenix-r3f-webgpu-hooks`](skills/threenix-r3f-webgpu-hooks/SKILL.md)
 - **Add a visual effect:** `$threenix-add-component fireworks`
 - **Add touch input:** `$threenix-add-component joystick`
 
@@ -58,7 +58,7 @@ claude plugin install threenix@threenix
 
 Start a new task or session after installing. For focused reviews, `@`-mention the chosen files as context.
 
-Invoke a skill by name: `$threenix-best-practices` in Codex, `/threenix-best-practices` in Cursor or Claude Code when installed through the Skills CLI, or `/threenix:threenix-best-practices` with the Claude Code plugin.
+Invoke a skill by name: `$threenix-threejs-best-practices` in Codex, `/threenix-threejs-best-practices` in Cursor or Claude Code when installed through the Skills CLI, or `/threenix:threenix-threejs-best-practices` with the Claude Code plugin.
 
 The plugin provides six skills: one for adding components, plus focused review, benchmark, optimization, and WebGPU hooks workflows.
 
@@ -66,13 +66,13 @@ The plugin provides six skills: one for adding components, plus focused review, 
 
 Catch performance problems, remove unnecessary complexity, and make Three.js, R3F, and TSL code easier to maintain.
 
-| Skill                                                                            | What it does                                                                                 |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| [`threenix-best-practices`](skills/threenix-best-practices/SKILL.md)             | Review and refactor Three.js and R3F code for performance and clarity.                       |
-| [`threenix-benchmark-webgpu`](skills/threenix-benchmark-webgpu/SKILL.md)         | Measure Three.js WebGPU render and compute workloads with GPU timestamps.                    |
-| [`threenix-clean-code`](skills/threenix-clean-code/SKILL.md)                     | Review and refactor TypeScript code against a Clean Code checklist.                          |
-| [`threenix-optimize-tsl`](skills/threenix-optimize-tsl/SKILL.md)                 | Optimize Three.js Shading Language (TSL) nodes without changing their visible output.        |
-| [`threenix-r3f-v10-webgpu-hooks`](skills/threenix-r3f-v10-webgpu-hooks/SKILL.md) | Choose WebGPU hooks and manage uniforms, graphs, buffers, textures, and pipeline lifecycles. |
+| Skill                                                                                | What it does                                                                                 |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| [`threenix-threejs-best-practices`](skills/threenix-threejs-best-practices/SKILL.md) | Review and refactor Three.js and R3F code for performance and clarity.                       |
+| [`threenix-benchmark-webgpu`](skills/threenix-benchmark-webgpu/SKILL.md)             | Measure Three.js WebGPU render and compute workloads with GPU timestamps.                    |
+| [`threenix-threejs-clean-code`](skills/threenix-threejs-clean-code/SKILL.md)         | Review TypeScript and R3F code for readability.                                              |
+| [`threenix-optimize-tsl`](skills/threenix-optimize-tsl/SKILL.md)                     | Optimize Three.js Shading Language (TSL) nodes without changing their visible output.        |
+| [`threenix-r3f-webgpu-hooks`](skills/threenix-r3f-webgpu-hooks/SKILL.md)             | Choose WebGPU hooks and manage uniforms, graphs, buffers, textures, and pipeline lifecycles. |
 
 For standalone baselines or before/after GPU comparisons, use [`threenix-benchmark-webgpu`](skills/threenix-benchmark-webgpu/SKILL.md) and its [Node benchmark guide](skills/threenix-benchmark-webgpu/BENCHMARK.md). `threenix-optimize-tsl` uses it when a shader change needs measurement.
 

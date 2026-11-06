@@ -1,6 +1,6 @@
 ---
 name: threenix-add-component
-description: Discover and add Threenix components, DOM input controls, hooks, WebGPU scene foundations, and visual effects using the Threenix MCP library. Use for a named resource or a description of the desired scene feature, including first-reveal compilation warmup.
+description: Discover and add Threenix components, hooks, DOM input controls, WebGPU scene foundations, and visual effects to a Three.js or React Three Fiber project through the Threenix MCP library. Use for a named resource or a description of the desired scene feature, including first-reveal compilation warmup.
 ---
 
 # Add a Threenix Component

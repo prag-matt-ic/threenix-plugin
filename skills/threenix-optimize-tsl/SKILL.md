@@ -1,6 +1,6 @@
 ---
 name: threenix-optimize-tsl
-description: Review and refactor TSL shader node graphs for performance, clarity, and portability. Use when the user invokes $threenix-optimize-tsl or asks to optimize Three.js Shading Language (TSL) code.
+description: Optimize Three.js Shading Language (TSL) shader node graphs for GPU cost, clarity, and portability without changing visible output. Use when a WebGPU node material or compute shader is slow, hard to read, or needs fewer instructions.
 ---
 
 # Review and refactor TSL node graphs for performance, clarity, and portability
