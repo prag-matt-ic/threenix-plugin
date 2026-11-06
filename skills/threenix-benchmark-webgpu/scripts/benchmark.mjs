@@ -121,7 +121,8 @@ async function main() {
   const load = (name) => import(pathToFileURL(require.resolve(name)).href)
   const { create, globals } = await load('webgpu')
   Object.assign(globalThis, globals)
-  // Three r184 starts an internal RAF in init. Keep it stopped; compileAsync still needs a yield callback.
+  // Three's Animation captures `self` as its requestAnimationFrame context. Keep that loop stopped;
+  // compileAsync still needs a working yield callback on the global.
   globalThis.self = { requestAnimationFrame: () => 0, cancelAnimationFrame() {} }
   globalThis.requestAnimationFrame = (callback) =>
     setImmediate(() => callback(performance.now()))
