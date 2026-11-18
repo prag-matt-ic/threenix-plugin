@@ -8,4 +8,4 @@ dependencies:
       value: 'threenix'
       description: 'Discover and retrieve canonical Threenix component references'
       transport: 'streamable_http'
-      url: 'https://developers.threenix.io/mcp'
+      url: 'https://threenix.io/mcp'

@@ -4,7 +4,7 @@
   "description": "Integrate Three.js components, review scene performance, benchmark WebGPU workloads, and optimize TSL shaders with Threenix skills.",
   "owner": {
     "name": "Threenix",
-    "url": "https://developers.threenix.io"
+    "url": "https://threenix.io"
   },
   "plugins": [
     {

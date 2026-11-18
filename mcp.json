@@ -3,7 +3,7 @@
   "mcpServers": {
     "threenix": {
       "type": "streamable-http",
-      "url": "https://developers.threenix.io/mcp"
+      "url": "https://threenix.io/mcp"
     }
   }
 }

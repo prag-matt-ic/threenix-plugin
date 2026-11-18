@@ -1,12 +1,12 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "threenix",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "Integrate Three.js components, review scene performance, benchmark WebGPU workloads, and optimize TSL shaders with Threenix skills.",
   "author": {
     "name": "Threenix"
   },
-  "homepage": "https://developers.threenix.io",
+  "homepage": "https://threenix.io",
   "repository": "https://github.com/prag-matt-ic/threenix-plugin",
   "keywords": [
     "three.js",

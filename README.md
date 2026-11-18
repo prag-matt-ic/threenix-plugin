@@ -1,6 +1,6 @@
-[![Threenix hero](assets/hero.jpg)](https://threenix.io)
+[![Threenix hero](assets/hero.jpg)](https://fly.threenix.io)
 
-[Explore the demo](https://threenix.io)
+[Explore the demo](https://fly.threenix.io)
 
 # Skills for Advanced React Three Fiber + WebGPU Developers
 
@@ -86,13 +86,13 @@ For standalone baselines or before/after GPU comparisons, use [`threenix-benchma
 | Claude Code plugin  | `/threenix:threenix-add-component fireworks` |
 | Cursor / Skills CLI | `/threenix-add-component fireworks`          |
 
-The skill requires the public Threenix MCP endpoint at `https://developers.threenix.io/mcp`; no API key is needed. Marketplace installs include its configuration. Skills CLI users must also connect that MCP server in their agent. If the connection fails, installation stops with an explanation.
+The skill requires the public Threenix MCP endpoint at `https://threenix.io/mcp`; no API key is needed. Marketplace installs include its configuration. Skills CLI users must also connect that MCP server in their agent. If the connection fails, installation stops with an explanation.
 
 Canonical source, dependencies, and integration notes come from MCP. Large asset collections download directly to disk, preserving relative paths without placing binary data in model context. Existing renderers and dependency ranges are preserved; WebGL migration is a separate task.
 
 ## Agent discovery
 
-The developers site publishes an [ARD manifest](https://developers.threenix.io/.well-known/ard.json) describing all six skills with example tasks and links to their canonical `SKILL.md` files. ARD helps compatible discovery services find the skills; it does not install them or guarantee indexing. Follow the installation instructions above to include supporting scripts and references, and connect MCP when using `threenix-add-component`.
+The developers site publishes an [ARD manifest](https://threenix.io/.well-known/ard.json) describing all six skills with example tasks and links to their canonical `SKILL.md` files. ARD helps compatible discovery services find the skills; it does not install them or guarantee indexing. Follow the installation instructions above to include supporting scripts and references, and connect MCP when using `threenix-add-component`.
 
 ## Startup updates
 
